@@ -1,6 +1,8 @@
 body {margin:0;  font-family:Verdana,Tahoma;background:#535069;}
 .page {width:100%;    top:0px;   display:none;}
 
+#new{min-height:1000px;}
+#edit{min-height:1000px;}
 /****************************************************************************/
 /****** HEADER **************************************************************/
 /****************************************************************************/
@@ -97,7 +99,7 @@ button:active {
 .subitem-left{ height:100%;   width:45px;    float:left;    cursor:pointer;}
 
 .title{overflow: hidden;    font-weight:bold;    height: 17px;    float:left;    display: block;    width:100%;}
-.notes {display: block;    font: italic 10px Arial;    color: #999;    max-height:100px;    margin-right:5px;   white-space: pre; }
+.notes {display: block;    font: italic 10px Arial;    color: #999;    max-height:100px;    margin-right:5px;   white-space: pre-line; }
 .subitem-next-action{color:#484; float: left;  display: block;  height: 17px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 .subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 /*.notes {display: block; font: italic 10px Arial; color: #999; height: 12px; overflow: hidden; width:300px; text-overflow:ellipsis; white-space:nowrap;}*/
