@@ -58,6 +58,17 @@ var itemList = {
 		var open_items = this.get_open_subitems(item_id);
 		var finished_items = this.get_finished_subitems(item_id);
 		
+		open_items .sort(
+		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+		 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
+		 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
+		);
+		
+		finished_items .sort(
+		 	firstBy(function (v1, v2) { return v2.finish_date > v1.finish_date; })
+		 //	.thenBy(function (v1, v2) { return v1.size - v2.size; })
+		);
+		
 		
 		//Fylla #open med 
 		open_items.forEach(function(item) {
@@ -68,7 +79,7 @@ var itemList = {
 			$("#open").append(html);
 		});
 		//sortera listan med öppna  
-		if (open_items.length != 0) tinysort("#open>.subitem",'span.prio', {selector:'span.size',order:'asc'}, {selector:'span.type',order:'asc'});
+		//if (open_items.length != 0) tinysort("#open>.subitem",'span.prio', {selector:'span.size',order:'asc'}, {selector:'span.type',order:'asc'});
 		
 		
 		finished_items.forEach(function(item) {
@@ -79,7 +90,6 @@ var itemList = {
 			$("#finished").append(html);
 		});
 		//sortera listan med avslutade 
-		if (finished_items.length != 0) tinysort("#finished>.subitem",{selector:'span.finish_date',order:'desc'});
 		
 		//Om listan är tom
 		if (finished_items.length == 0 & open_items.length==0) $("#open").append("<div class='empty'>No items here</div>");
@@ -94,16 +104,20 @@ var itemList = {
 		//filtrera itemArray	
 		var filtered_items = this.get_type_items(type, query);
 		
+		filtered_items .sort(
+		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+		 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
+		);
+		
 		filtered_items.forEach(function(item) {
 			var template = $('#filtered_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#filtered").append(html);
 		});
 		
-		//sortera listan med filtrerade 
-		if (filtered_items.length != 0) tinysort("#filtered>.subitem",{selector:'span.prio',order:'asc'}, {selector:'span.size',order:'asc'} );
+		
 		//Om listan är tom
-		else $("#filtered").append("<div class='empty'>No items here</div>");
+		if (filtered_items.length == 0)  $("#filtered").append("<div class='empty'>No items here</div>");
 	},
 	
 	
@@ -253,3 +267,7 @@ var itemList = {
 	
 	
 }
+
+
+/*** Copyright 2013 Teun Duynstee Licensed under the Apache License, Version 2.0 ***/
+firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=this;return e(function(a,b){return x(a,b)||y(a,b)})}return e})();
