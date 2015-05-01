@@ -65,7 +65,11 @@ var itemList = {
 		);
 		
 		finished_items .sort(
-		 	firstBy(function (v1, v2) { return v2.finish_date > v1.finish_date; })
+		 	firstBy(function (v1, v2) { 
+			 	var a = moment(v1.finish_date);
+		 		var b = moment(v2.finish_date);
+		 		return a>b ? -1 : a<b ? 1 : 0;
+		 	})
 		 //	.thenBy(function (v1, v2) { return v1.size - v2.size; })
 		);
 		
