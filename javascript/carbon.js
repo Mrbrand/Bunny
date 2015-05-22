@@ -77,8 +77,11 @@ var itemList = {
 		//Fylla #open med 
 		open_items.forEach(function(item) {
 			item.subitems = itemList.get_prio1_subitems(item.id,1);
-			
-			
+			item.subitems .sort(
+			 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+			 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
+			 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
+			);
 			var template = $('#open_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#open").append(html);
@@ -87,18 +90,15 @@ var itemList = {
 		
 		finished_items.forEach(function(item) {
 			item.subitems = itemList.get_open_subitems(item.id,1);
-			//item.subitems.sort(function(a, b){return a.type-b.type});
 			item.subitems .sort(
 			 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
 			 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
 			 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
 			);
-		
 			var template = $('#finished_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#finished").append(html);
 		});
-		//sortera listan med avslutade 
 		
 		//Om listan är tom
 		if (finished_items.length == 0 & open_items.length==0) $("#open").append("<div class='empty'>No items here</div>");
