@@ -243,7 +243,7 @@
 			
 			<div id="header">
 				<div class="menu-title">MENU</div>
-				<img class="cancel-button" src="img/menu-button.png"  style="float:right; margin:5px;"/>
+				<button class="cancel-button">Back</button>
 			</div> <end header-->
 			<button onclick="window.open('mailto:test@example.com?subject=WiseGuy backup&body='+JSON.stringify(itemList.itemArray));">Mail backup</button>
 			<!--span style="color:white;">These functions are experimental, use with caution!</span> <br/>
@@ -271,8 +271,10 @@
 			<div class="next_action_div" style="float:left;">
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
 				{{#subitems}}
+					
 					<img style="margin:4px 0px 4px 5px;height:10px;vertical-align: text-top;" src="img/type{{type}}.png"/>
-					<span class="next_action">{{title}}</span><br/>  
+					<span class="next_action">{{title}}</span>
+					<img class="prio-icon" style="height:12px; position:relative; top: 3px;" src="img/subprio{{prio}}.png"/><br/>  
 				{{/subitems}}
 			</div>
 		</div><!-- end subitem-center -->

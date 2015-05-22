@@ -213,9 +213,17 @@ var itemList = {
 	},
 	
 	get_prio1_subitems : function(id){
-		return this.itemArray.filter(function (item){
-			return item.parent_id == id & item.finish_date === undefined & item.prio==1;
+		var subitems = this.itemArray.filter(function (item){
+			return item.parent_id == id & item.finish_date === undefined & item.prio<=2;
 		});
+		
+		subitems .sort(
+		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+		 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
+		 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
+		);
+		
+		return subitems;
 	},
 	
 	get_finished_subitems : function(id){
