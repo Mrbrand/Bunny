@@ -3,27 +3,20 @@ CACHE MANIFEST
 # 2015-05-22 : v4
 
 CACHE:
-
 index.html
-
 style.css
 carbon.css
-
 javascript/jquery-2.1.3.min.js
 javascript/mustache.js
 javascript/moment.min.js
 javascript/jquery.detect_swipe.js
 javascript/carbon.js
-
-
 img/size0.png
 img/size1.png
 img/size2.png
 img/size3.png
 img/size4.png
 img/size5.png
-#img/size.png
-
 img/type0.png
 img/type1.png
 img/type2.png
@@ -39,19 +32,15 @@ img/type11.png
 img/type12.png
 img/type13.png
 img/type14.png
-
 img/prio0.png
 img/prio1.png
 img/prio2.png
 img/prio3.png
 img/prio4.png
 img/prio5.png
-
 img/subprio0.png
 img/subprio1.png
-
 img/none.png
-
 img/save.png
 img/delete2.png
 img/finish.gif
