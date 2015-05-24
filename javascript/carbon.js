@@ -115,6 +115,7 @@ var itemList = {
 		
 		filtered_items .sort(
 		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+		 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
 		 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
 		);
 		
