@@ -452,7 +452,7 @@
 
 //swipe to backend menu
 	$("#tree").on('swipeleft',  function(){ 
-		if(Date.now()  - latest_swipe <200){
+		if(Date.now()  - latest_swipe <1000){
 			alert("2 left swipes -> Backdoor menu");
 			$(".page").hide();
 			$("#menu").show();
