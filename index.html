@@ -335,7 +335,12 @@
 			<div class="next_action_div" style="float:left;">
 				<span class="finish_date">{{finish_date}}</span>
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
-				
+				{{#subitems}}
+					
+					<img style="margin:4px 0px 4px 5px;height:10px;vertical-align: text-top;" src="img/type{{type}}.png"/>
+					<span class="next_action">{{title}}</span>
+					<img class="prio-icon" style="height:12px; position:relative; top: 3px;" src="img/subprio{{prio}}.png"/><br/>  
+				{{/subitems}}
 			</div>
 		</div><!-- end subitem-center -->
 		 
