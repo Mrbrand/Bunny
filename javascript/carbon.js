@@ -46,6 +46,7 @@ var itemList = {
 	init : function(key) {     
 		var array_from_storage = JSON.parse(window.localStorage.getItem(key));
 		this.itemArray = array_from_storage;
+		this.itemArray[0].path = "//";
 	},
 	
 	refresh : function(item_id) {   
