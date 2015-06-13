@@ -242,12 +242,12 @@ var itemList = {
 		console.log(query);
 		if (type!="all")
 			return this.itemArray.filter(function (item){
-			 	return item.type == type & item.title.toLowerCase().indexOf(query) !== -1 & item.finish_date === undefined;
-			 	
+			 	return item.type == type &	(item.title.toLowerCase().indexOf(query) !== -1 | item.path.toLowerCase().indexOf(query) !== -1)  & item.finish_date === undefined;
+			 
 			});
 		
 		else return this.itemArray.filter(function (item){
-			 	return item.id !=0 & item.title.toLowerCase().indexOf(query) !== -1 & item.finish_date === undefined;
+			 	return item.id !=0 & (item.title.toLowerCase().indexOf(query) !== -1 | item.path.toLowerCase().indexOf(query) !== -1)  & item.finish_date === undefined;
 		});
 	},
 	
