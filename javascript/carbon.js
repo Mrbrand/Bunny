@@ -61,8 +61,13 @@ var itemList = {
 		
 		open_items .sort(
 		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
-		 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
-		 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
+		 	.thenBy(function (v1, v2) { 
+			 	if(v1.postpone==undefined) v1.postpone = "";
+			 	if(v2.postpone==undefined) v2.postpone = "";	
+			 	return v1.postpone.localeCompare(v2.postpone);
+		 	})
+		// 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
+		// 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
 		);
 		
 		finished_items .sort(
@@ -116,6 +121,11 @@ var itemList = {
 		
 		filtered_items .sort(
 		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+		 	.thenBy(function (v1, v2) { 
+			 	if(v1.postpone==undefined) v1.postpone = ""; //fixar sorteringsfel
+			 	if(v2.postpone==undefined) v2.postpone = "";	//fixar sorteringsfel
+			 	return v1.postpone.localeCompare(v2.postpone);
+		 	})
 		 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
 		 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
 		);
@@ -127,6 +137,7 @@ var itemList = {
 			 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
 			 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
 			);
+			if(moment(item.postpone) < moment()) item.postpone =""; 
 			var template = $('#filtered_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#filtered").append(html);

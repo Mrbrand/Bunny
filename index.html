@@ -153,6 +153,8 @@
 					<option value="5">XLarge (>3h)</option>
 				</select><br/>
 				
+			
+				
 				<textarea class="item-notes" name="notes" rows="10" placeholder="Notes"></textarea>
 				
 				<center>
@@ -163,6 +165,8 @@
 					<input class="item-id" name="id" type="text" readonly="readonly" style="color:#CCC;"/> <br/>
 					<span class="field-description">parent_id:</span>
 					<input class="item-parent-id" name="parent_id" type="text" style="margin-bottom:5px;"/><br/>
+					<span class="field-description">Postpone date:</span>
+					<input class="postpone" type="text" name="postpone" /><br/>	
 					<span class="field-description">Finish date</span>
 					<input class="finish_date" name="finish_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 				</div>
@@ -269,6 +273,7 @@
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
 			<div class="next_action_div" style="float:left;">
+				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
 				{{#subitems}}
 					
@@ -333,7 +338,7 @@
 			<div class="title" style="">{{title}}</div>
 			{{#path}}<div class="path" style="">{{path}}</div>{{/path}}
 			<div class="next_action_div" style="float:left;">
-				<span class="finish_date">{{finish_date}}</span>
+				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
 				{{#subitems}}
 					
@@ -386,7 +391,7 @@
      	$(".item-size").val(edit_item.size);
  		$(".finish_date").val(edit_item.finish_date);
      	$("input.item-parent-id").val(edit_item.parent_id);
-		
+		$(".postpone").val(edit_item.postpone);
 			/*$("input.item-category").val(current.category);
         $("input.item-create-date").val(current.date_create);
         $("input.item-finish-date").val(current.date_finished);*/
