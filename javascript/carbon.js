@@ -164,6 +164,7 @@ var itemList = {
 	
 
 	add_item : function(item){
+		item['start_date'] = moment().format('YYYY-MM-DD HH:mm:ss');
 		this.itemArray.push(item);
 		window.localStorage.setItem("key", JSON.stringify(this.itemArray));
 	},
