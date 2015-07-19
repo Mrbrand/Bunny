@@ -121,16 +121,12 @@ var itemList = {
 		
 		filtered_items .sort(
 		 	firstBy(function (v1, v2) { 
-					var a = (v1.path);
-			 		var b = (v2.path);
-			 		return a<b ? -1 : a>b ? 1 : 0;
-				})
-			.thenBy(function (v1, v2) { return v1.prio - v2.prio; })
-		 	.thenBy(function (v1, v2) { 
-			 	if(v1.postpone==undefined) v1.postpone = ""; //fixar sorteringsfel
+		 	 	if(v1.postpone==undefined) v1.postpone = ""; //fixar sorteringsfel
 			 	if(v2.postpone==undefined) v2.postpone = "";	//fixar sorteringsfel
 			 	return v1.postpone.localeCompare(v2.postpone);
 		 	})
+		 	.thenBy(function (v1, v2) { 	return v1.path<v2.path ? -1 : v1.path>v2.path ? 1 : 0;})
+			.thenBy(function (v1, v2) { return v1.prio - v2.prio; })
 		 	//.thenBy(function (v1, v2) { return v1.type - v2.type; })
 		 	//.thenBy(function (v1, v2) { return v1.size - v2.size; })
 		);
