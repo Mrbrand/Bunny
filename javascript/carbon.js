@@ -120,14 +120,19 @@ var itemList = {
 		var filtered_items = this.get_type_items(type, query);
 		
 		filtered_items .sort(
-		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+		 	firstBy(function (v1, v2) { 
+					var a = (v1.path);
+			 		var b = (v2.path);
+			 		return a>b ? -1 : a<b ? 1 : 0;
+				})
+			.thenBy(function (v1, v2) { return v1.prio - v2.prio; })
 		 	.thenBy(function (v1, v2) { 
 			 	if(v1.postpone==undefined) v1.postpone = ""; //fixar sorteringsfel
 			 	if(v2.postpone==undefined) v2.postpone = "";	//fixar sorteringsfel
 			 	return v1.postpone.localeCompare(v2.postpone);
 		 	})
-		 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
-		 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
+		 	//.thenBy(function (v1, v2) { return v1.type - v2.type; })
+		 	//.thenBy(function (v1, v2) { return v1.size - v2.size; })
 		);
 		
 		filtered_items.forEach(function(item) {
