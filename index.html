@@ -144,6 +144,20 @@
 					<option value="8">-Page</option>  
 				</select><br/>
 				
+				<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val((moment($('.postpone').val()).add(1, 'week')).format('YYYY-MM-DD'));">+1 week</button>
+				<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val((moment($('.postpone').val()).add(1, 'days')).format('YYYY-MM-DD'));">+1 day</button>	
+				<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val(moment().add(1, 'days').format('YYYY-MM-DD'));">Tomorrow</button>	
+			  	<div style="overflow: hidden; padding-right: .5em;">
+					<input class="postpone" type="text" name="postpone" placeholder="Postpone to..." />
+				</div>
+					
+
+				<textarea class="item-notes" name="notes" rows="10" placeholder="Notes"></textarea>
+
+				<center>
+					<button class="more-button" type='button'>More options</button>
+				</center>
+				<div class="more" style="display:none;">
 				<select class="item-size" name="size" style="margin-bottom:5px;height:40px;">
 					<option value="6">--Set size--</option>
 					<option value="1">Quick (5min)</option>
@@ -153,20 +167,6 @@
 					<option value="5">XLarge (>3h)</option>
 				</select><br/>
 
-				<textarea class="item-notes" name="notes" rows="10" placeholder="Notes"></textarea>
-
-					<span class="field-description">Postpone date:</span>
-					<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val((moment($('.postpone').val()).add(1, 'week')).format('YYYY-MM-DD'));">+1 week</button>
-					<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val((moment($('.postpone').val()).add(1, 'days')).format('YYYY-MM-DD'));">+1 day</button>	
-					<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val(moment().format('YYYY-MM-DD'));">now</button>	
-				  	<div style="overflow: hidden; padding-right: .5em;">
-						<input class="postpone" type="text" name="postpone" />
-					</div>
-				
-				<center>
-					<button class="more-button" type='button'>More options</button>
-				</center>
-				<div class="more" style="display:none;">
 					<span class="field-description">id:</span>
 					<input class="item-id" name="id" type="text" readonly="readonly" style="color:#CCC;"/> <br/>
 					<span class="field-description">parent_id:</span>
