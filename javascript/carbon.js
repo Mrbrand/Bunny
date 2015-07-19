@@ -123,7 +123,7 @@ var itemList = {
 		 	firstBy(function (v1, v2) { 
 					var a = (v1.path);
 			 		var b = (v2.path);
-			 		return a>b ? -1 : a<b ? 1 : 0;
+			 		return a>b ? -1 : a>b ? 1 : 0;
 				})
 			.thenBy(function (v1, v2) { return v1.prio - v2.prio; })
 		 	.thenBy(function (v1, v2) { 
