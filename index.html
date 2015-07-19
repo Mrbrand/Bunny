@@ -144,11 +144,11 @@
 					<option value="8">-Page</option>  
 				</select><br/>
 				
-				<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val((moment($('.postpone').val()).add(1, 'week')).format('YYYY-MM-DD'));">+1 week</button>
-				<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val((moment($('.postpone').val()).add(1, 'days')).format('YYYY-MM-DD'));">+1 day</button>	
-				<button type="button" style="float: right;margin-right:5px;" onclick="$('.postpone').val(moment().add(1, 'days').format('YYYY-MM-DD'));">Tomorrow</button>	
+				<button type="button" style="float: right;margin-right:5px;" onclick="$('#postpone').val((moment($('#postpone').val()).add(1, 'week')).format('YYYY-MM-DD'));">+1 week</button>
+				<button type="button" style="float: right;margin-right:5px;" onclick="$('#postpone').val((moment($('#postpone').val()).add(1, 'days')).format('YYYY-MM-DD'));">+1 day</button>	
+				<button type="button" style="float: right;margin-right:5px;" onclick="$('#postpone').val(moment().add(1, 'days').format('YYYY-MM-DD'));">Tomorrow</button>	
 			  	<div style="overflow: hidden; padding-right: .5em;">
-					<input class="postpone" type="text" name="postpone" placeholder="Postpone to..." />
+					<input id="postpone" type="text" name="postpone" placeholder="Postpone to..." />
 				</div>
 					
 
@@ -342,7 +342,7 @@
 			<div class="title" style="">{{title}}</div>
 			{{#path}}<div class="path" style="">{{path}}</div>{{/path}}
 			<div class="next_action_div" style="float:left;">
-				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
+				{{#postpone}}<span class="postpone">{{postpone}}</span><br/>{{/postpone}}
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
 				{{#subitems}}
 					
@@ -395,7 +395,7 @@
      	$(".item-size").val(edit_item.size);
  		$(".finish_date").val(edit_item.finish_date);
      	$("input.item-parent-id").val(edit_item.parent_id);
-		$(".postpone").val(edit_item.postpone);
+		$("#postpone").val(edit_item.postpone);
 			/*$("input.item-category").val(current.category);
         $("input.item-create-date").val(current.date_create);
         $("input.item-finish-date").val(current.date_finished);*/

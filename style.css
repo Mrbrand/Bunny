@@ -100,7 +100,7 @@ button:active {
 
 .title{overflow: hidden;    font-weight:bold;    height: 17px;    float:left;    display: block;    width:100%;}
 .notes {display: block;    font: italic 10px Arial;    color: #999;     margin-right:5px;   white-space: pre-line; }
-.postpone {display: block;    font: italic 12px Arial;    color: darkblue;    background: #DDD;    height: 30px;  margin-bottom:5px;   padding:3px;  margin-right:5px;   white-space: pre-line;}
+.postpone {font: italic 10px Arial;    color: blue;    margin-right:5px;   background:#345; padding:2px;}
 .subitem-next-action{color:#484; float: left;  display: block;  height: 17px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 .subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 /*.notes {display: block; font: italic 10px Arial; color: #999; height: 12px; overflow: hidden; width:300px; text-overflow:ellipsis; white-space:nowrap;}*/
@@ -122,3 +122,4 @@ textarea {width:100%;  border:0; padding:5px; margin:0; font-size:12pt; color:#5
 select {  width:100%;  border: 0;  padding:5px;  margin:0;  font-size: 12pt;  color: #555;  margin-bottom: 3px;box-sizing: border-box;}
 input {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
 .btn {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
+#postpone {display: block;    font: italic 12px Arial;    color: darkblue;    background: #DDD;    height: 30px;  margin-bottom:5px;   padding:3px;  margin-right:5px;   white-space: pre-line;}
