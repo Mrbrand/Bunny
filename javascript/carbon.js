@@ -55,10 +55,11 @@ var itemList = {
 		$("#open").empty();
 		$("#finished").empty();
 		
-		//filtrera itemArray
+		// ladda in itemArray filtrerat på id
 		var open_items = this.get_open_subitems(item_id);
 		var finished_items = this.get_finished_subitems(item_id);
 		
+		//sortera array med items
 		open_items .sort(
 		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
 		 	.thenBy(function (v1, v2) { 
@@ -66,34 +67,37 @@ var itemList = {
 			 	if(v2.postpone==undefined) v2.postpone = "";	
 			 	return v1.postpone.localeCompare(v2.postpone);
 		 	})
-		// 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
-		// 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
 		);
+		
 		
 		finished_items .sort(
 		 	firstBy(function (v1, v2) { 
-			 	var a = moment(v1.finish_date);
-		 		var b = moment(v2.finish_date);
+			 	var a = moment(v1.finish_date, 'YYYY-MM-DD HH:mm:ss');
+		 		var b = moment(v2.finish_date, 'YYYY-MM-DD HH:mm:ss');
 		 		return a>b ? -1 : a<b ? 1 : 0;
 		 	})
-		 //	.thenBy(function (v1, v2) { return v1.size - v2.size; })
 		);
 		
 		
-		//Fylla #open med 
+		
+		//mustache output (ett item i taget)	
 		open_items.forEach(function(item) {
-			item.subitems = itemList.get_prio1_subitems(item.id,1);
-			item.subitems .sort(
-			 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
-			 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
-			 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
-			);
+			// lägga till item.subitem  
+			if(item.type != '13'){//om type == kategori skippa subitems
+				item.subitems = itemList.get_prio1_subitems(item.id,1);
+				item.subitems .sort(
+				 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+				 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
+				 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
+				);
+			}
+			else item.subitems = [];
 			var template = $('#open_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#open").append(html);
 		});
 		
-		
+		// lägga till item.subitem  
 		finished_items.forEach(function(item) {
 			item.subitems = itemList.get_open_subitems(item.id,1);
 			item.subitems .sort(
@@ -138,7 +142,7 @@ var itemList = {
 			 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
 			 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
 			);
-			if(moment(item.postpone) < moment()) item.postpone =""; 
+			if(moment(item.postpone, 'YYYY-MM-DD HH:mm:ss') < moment()) item.postpone =""; 
 			var template = $('#filtered_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#filtered").append(html);

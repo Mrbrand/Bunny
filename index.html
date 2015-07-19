@@ -166,7 +166,11 @@
 					<span class="field-description">parent_id:</span>
 					<input class="item-parent-id" name="parent_id" type="text" style="margin-bottom:5px;"/><br/>
 					<span class="field-description">Postpone date:</span>
-					<input class="postpone" type="text" name="postpone" /><br/>	
+					<input class="postpone" type="text" name="postpone" />
+					<button type="button" onclick="$('.postpone').val(moment().format('YYYY-MM-DD'));">now</button>	
+					<button type="button" onclick="$('.postpone').val((moment($('.postpone').val()).add(1, 'days')).format('YYYY-MM-DD'));">+1 day</button>	
+					<button type="button" onclick="$('.postpone').val((moment($('.postpone').val()).add(1, 'week')).format('YYYY-MM-DD'));">+1 week</button>
+					<br/><br/>
 					<span class="field-description">Finish date</span>
 					<input class="finish_date" name="finish_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 				</div>
