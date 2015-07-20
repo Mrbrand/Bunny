@@ -173,6 +173,8 @@
 					<input class="item-parent-id" name="parent_id" type="text" style="margin-bottom:5px;"/><br/>					
 					<span class="field-description">Finish date</span>
 					<input class="finish_date" name="finish_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+					<span class="field-description">Icon</span>
+					<input class="icon" name="icon" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 				</div>
 				
 			</form>
@@ -270,7 +272,8 @@
 						
 		<div class="subitem-left quick_edit_item">
 			<img class="prio-icon" src="img/prio{{prio}}.png"/>
-			<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
+			{{#icon}}<div style="font-size: 28px; margin:0px 7px; ">{{icon}}</div>{{/icon}}
+			{{^icon}}<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>{{/icon}}
 			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
 		</div>
 		
@@ -334,7 +337,8 @@
 						
 		<div class="subitem-left quick_edit_item">
 			<img class="prio-icon" src="img/prio{{prio}}.png"/>
-			<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
+			{{#icon}}<div style="font-size: 18px; margin:4px 7px; ">{{icon}}</div>{{/icon}}
+			{{^icon}}<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>{{/icon}}
 			<img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
 		</div>
 		
@@ -394,6 +398,7 @@
      	$(".item-type").val(edit_item.type);
      	$(".item-size").val(edit_item.size);
  		$(".finish_date").val(edit_item.finish_date);
+ 		$(".icon").val(edit_item.icon);
      	$("input.item-parent-id").val(edit_item.parent_id);
 		$("#postpone").val(edit_item.postpone);
 			/*$("input.item-category").val(current.category);
