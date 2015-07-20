@@ -84,7 +84,7 @@ var itemList = {
 		open_items.forEach(function(item) {
 			// lägga till item.subitem  
 			if(item.type != '13'){//om type == kategori skippa subitems
-				item.subitems = itemList.get_prio1_subitems(item.id,1);
+				item.subitems = itemList.get_prio1_subitems(item.id);
 				item.subitems .sort(
 				 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
 				 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
@@ -99,7 +99,7 @@ var itemList = {
 		
 		// lägga till item.subitem  
 		finished_items.forEach(function(item) {
-			item.subitems = itemList.get_open_subitems(item.id,1);
+			item.subitems = itemList.get_open_subitems(item.id);
 			item.subitems .sort(
 			 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
 			 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
@@ -136,7 +136,7 @@ var itemList = {
 		);
 		
 		filtered_items.forEach(function(item) {
-			item.subitems = itemList.get_prio1_subitems(item.id,1);
+			item.subitems = itemList.get_prio1_subitems(item.id);
 			item.subitems .sort(
 			 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
 			 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
@@ -244,7 +244,7 @@ var itemList = {
 	
 	get_prio1_subitems : function(id){
 		var subitems = this.itemArray.filter(function (item){
-			return item.parent_id == id & item.finish_date === undefined & item.prio<=2;
+			return item.parent_id == id & item.finish_date === undefined & item.prio<=1;
 		});
 		return subitems;
 	},
