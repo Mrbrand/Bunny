@@ -170,7 +170,9 @@
 					<span class="field-description">id:</span>
 					<input class="item-id" name="id" type="text" readonly="readonly" style="color:#CCC;"/> <br/>
 					<span class="field-description">parent_id:</span>
-					<input class="item-parent-id" name="parent_id" type="text" style="margin-bottom:5px;"/><br/>					
+					<input class="item-parent-id" name="parent_id" type="text" style="margin-bottom:5px;"/><br/>	
+					<span class="field-description">Start date</span>
+					<input class="start_date" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>				
 					<span class="field-description">Finish date</span>
 					<input class="finish_date" name="finish_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 					<span class="field-description">Icon</span>
@@ -398,6 +400,7 @@
      	$(".item-type").val(edit_item.type);
      	$(".item-size").val(edit_item.size);
  		$(".finish_date").val(edit_item.finish_date);
+ 		$(".start_date").val(edit_item.start_date);
  		$(".icon").val(edit_item.icon);
      	$("input.item-parent-id").val(edit_item.parent_id);
 		$("#postpone").val(edit_item.postpone);
