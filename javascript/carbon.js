@@ -142,7 +142,7 @@ var itemList = {
 			 	.thenBy(function (v1, v2) { return v1.size - v2.size; })
 			 	.thenBy(function (v1, v2) { return v1.type - v2.type; })
 			);
-			if(moment(item.postpone, 'YYYY-MM-DD HH:mm:ss') < moment()) item.postpone =""; 
+			if(moment(item.postpone, 'YYYY-MM-DD ddd') < moment()) item.postpone =""; 
 			var template = $('#filtered_items_template').html();
 			var html = Mustache.to_html(template, item);
 			$("#filtered").append(html);
