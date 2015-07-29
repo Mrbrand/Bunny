@@ -3,6 +3,7 @@
 var current = {id:0, parent_id:0, title:"Alla"};
 var view = "tree";
 var latest_swipe;
+var id;
 //var appCache = window.applicationCache;
 
 itemList.init("key");
@@ -14,7 +15,7 @@ view_item(0);
 // .subitem-left (visa edit-läge)
 $(document).on('click', ".subitem-left", function() {
 	
-	var id = $(this).parent().find(".item_id").text();
+	id = $(this).parent().find(".item_id").text();
 	edit_item = itemList.get_item(id);
  
 	$(".menu-title").html("Edit: "+edit_item.title);
@@ -39,6 +40,8 @@ $(document).on('click', ".subitem-left", function() {
 	
 	$('.more').hide();
 	$('.more-button').show();
+	
+	window.scrollTo(0, 0);
  });
  
 
@@ -64,6 +67,8 @@ $(document).on('click', ".new-button", function() {
 	
 	$(".page").hide();
 	$("#new").show();
+	
+	window.scrollTo(0, 0);
  });
 
 // .add-button
@@ -78,6 +83,8 @@ $(document).on('click', ".save-button", function() {
    itemList.edit_from_form("#edit-item-form");
 	if(view=="tree")	view_item(current.id);
 	else view_filter();
+	var scroll_offset = $(".item_id:contains('"+id+"')").parent().offset().top-100;
+    window.scrollTo(0, scroll_offset);
  });
 
 
@@ -113,6 +120,8 @@ $("#tree").on('swipeleft',  function(){
 $(document).on('click', ".cancel-button", function() {
   	if(view=="tree")	view_item(current.id);
 	else view_filter();
+	var scroll_offset = $(".item_id:contains('"+id+"')").parent().offset().top-100;
+   window.scrollTo(0, scroll_offset);
  });
 
 // .delete-button
