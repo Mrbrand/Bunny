@@ -129,8 +129,8 @@ var itemList = {
 			 	if(v2.postpone==undefined) v2.postpone = "";	//fixar sorteringsfel
 			 	return v1.postpone.localeCompare(v2.postpone);
 		 	})
-		 	.thenBy(function (v1, v2) { 	return v1.path<v2.path ? -1 : v1.path>v2.path ? 1 : 0;})
 			.thenBy(function (v1, v2) { return v1.prio - v2.prio; })
+			.thenBy(function (v1, v2) { return v1.path<v2.path ? -1 : v1.path>v2.path ? 1 : 0;})
 		 	//.thenBy(function (v1, v2) { return v1.type - v2.type; })
 		 	//.thenBy(function (v1, v2) { return v1.size - v2.size; })
 		);
