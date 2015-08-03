@@ -8,6 +8,7 @@ var id;
 
 itemList.init("key");
 if (itemList.itemArray==undefined) itemList.exampledata();
+else if(itemList.itemArray==null) itemList.exampledata();
 itemList.filtered("all","");
 view_item(0);
 
