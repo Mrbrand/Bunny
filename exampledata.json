@@ -1,0 +1,23 @@
+[
+{"title":"","prio":"6","type":"13","notes":"Root item - inte ändra!","parent_id":"-1","status":"open","id":"0","finish_date":"","path":"/","postpone":""},
+
+{"title":"Home","type":"13","prio":"6","notes":"","parent_id":"0","status":"open","start_date":"2015-08-27 10:33:10","id":1,"path":"//","postpone":"","finish_date":""},
+    {"title":"House","type":"13","prio":"6","notes":"","parent_id":"1","status":"open","start_date":"2015-08-27 10:33:10","id":4,"path":"//","postpone":"","finish_date":""},
+    {"title":"Car","type":"13","prio":"6","notes":"","parent_id":"1","status":"open","start_date":"2015-08-27 10:33:10","id":5,"path":"//","postpone":"","finish_date":""},
+    {"title":"Economy","type":"13","prio":"6","notes":"","parent_id":"1","status":"open","start_date":"2015-08-27 10:33:10","id":6,"path":"//","postpone":"","finish_date":""},
+    {"title":"Stuff","type":"13","prio":"6","notes":"","parent_id":"1","status":"open","start_date":"2015-08-27 10:33:10","id":7,"path":"//","postpone":"","finish_date":""},
+
+
+{"title":"Personal","type":"13","prio":"6","notes":"","parent_id":"0","status":"open","start_date":"2015-08-27 10:33:10","id":2,"path":"//","postpone":"","finish_date":""},
+    {"title":"Family","type":"13","prio":"6","notes":"","parent_id":"2","status":"open","start_date":"2015-08-27 10:33:10","id":8,"path":"//","postpone":"","finish_date":""},
+    {"title":"Friends","type":"13","prio":"6","notes":"","parent_id":"2","status":"open","start_date":"2015-08-27 10:33:10","id":9,"path":"//","postpone":"","finish_date":""},
+    {"title":"Health","type":"13","prio":"6","notes":"","parent_id":"2","status":"open","start_date":"2015-08-27 10:33:10","id":10,"path":"//","postpone":"","finish_date":""},
+    {"title":"Fun stuff","type":"13","prio":"6","notes":"","parent_id":"2","status":"open","start_date":"2015-08-27 10:33:10","id":11,"path":"//","postpone":"","finish_date":""},
+
+{"title":"Work","type":"13","prio":"6","notes":"","parent_id":"0","status":"open","start_date":"2015-08-27 10:33:10","id":3,"path":"//","postpone":"","finish_date":""},
+    {"title":"Project 1","type":"13","prio":"6","notes":"","parent_id":"3","status":"open","start_date":"2015-08-27 10:33:10","id":12,"path":"//","postpone":"","finish_date":""},
+    {"title":"Project 2","type":"13","prio":"6","notes":"","parent_id":"3","status":"open","start_date":"2015-08-27 10:33:10","id":13,"path":"//","postpone":"","finish_date":""},
+    {"title":"Project 3","type":"13","prio":"6","notes":"","parent_id":"3","status":"open","start_date":"2015-08-27 10:33:10","id":14,"path":"//","postpone":"","finish_date":""}
+
+
+]

@@ -1,24 +1,37 @@
-#header{background:#446;}
-.submenu{background:#335;}
+/* bakgrund*/
+body {margin:0;  font-family:Verdana,Tahoma;background:#78A;}
+
+/* Där titel och knapp för Tree/Filter är*/
+.header{background:#78A;}
+
+/* Där back och new knapp sitter*/
+.controls{background: -webkit-linear-gradient(#567, #345);}
+
 .project{ 
-    background: -webkit-linear-gradient(#667, #445);
-    color: #DDA;
+    background: -webkit-linear-gradient(#FFF, #CCC);
+    color: #333;
 }
 .notes{color:#88A;}
 .next_action{color: #A96;}
 
 
 .finished{
-	background: -webkit-linear-gradient(#99A, #778);
+    background: -webkit-linear-gradient(#99A, #778);
 }
 
 .postponed{
-    background:  -webkit-linear-gradient(#669, #447);
+    background:  -webkit-linear-gradient(#DDF, #BBE);
 }
 
 .finished>.subitem-center>.title{color:#CCC;}
 .finished>.subitem-center>.next_action_div>.notes{color:#CCC;}
 .finished>.subitem-left>img{opacity: 0.4;}
+
+
+
+#search .header{background:#364;}
+#search .controls{background: -webkit-linear-gradient(#252, #030);}
+#search {background:#7A9;}
 /* CSS - Cascading Style Sheet */
 /* Palette color codes */
 /* Palette URL: http://paletton.com/#uid=11s0u0klEbJdslfgrezqD7PyY3T */

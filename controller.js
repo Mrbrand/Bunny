@@ -1,40 +1,118 @@
+/*****************************************************************************/
+/** Uppstart *****************************************************************/
+/*****************************************************************************/
 
-// Uppstart
+// deklkarera variabler
 var current = {id:0, parent_id:0, title:"Alla"};
 var view = "tree";
-var latest_swipe;
 var id;
-//var appCache = window.applicationCache;
+var edit_item_prio =  $("#edit-item-prio").msDropDown().data("dd");
+var edit_item_type =  $("#edit-item-type").msDropDown().data("dd");
+var new_item_prio =  $("#new-item-prio").msDropDown().data("dd");
+var new_item_type =  $("#new-item-type").msDropDown().data("dd");
+var preferences = {};
+var scroll_position = 0;
 
-itemList.init("key");
+var quick_list_items = [];
+var input_parent = document.getElementById("parent");
+var awesomplete = new Awesomplete(input_parent);
+
+// Initiera itemslista från local storage
+itemList.init("wiseguy_items");
 if (itemList.itemArray==undefined) itemList.exampledata();
 else if(itemList.itemArray==null) itemList.exampledata();
-itemList.filtered("all","");
+//itemList.filtered("all","");
 view_item(0);
 
 
-// .subitem-left (visa edit-läge)
+// Initiera snabblista med awesomplete
+var open_items = itemList.get_all_items().query("finish_date","==","");
+open_items.forEach(function(item) {
+    quick_list_items.push(item.title+" #"+item.id);
+}); 
+awesomplete.list = quick_list_items;
+
+// Initiera Inställningar från local storage  
+var preferences = window.localStorage.getItem("wiseguy_preferences");
+if (preferences == undefined | preferences == null | preferences == "") 
+    window.localStorage.setItem("wiseguy_preferences",'{"slot1":"0", "slot2":"0", "slot3":"0", "slot4":"0", "slot5":"0", "background_color": "", "controls_color":""}');
+preferences = window.localStorage.getItem("wiseguy_preferences");
+
+set_preferences();
+
+
+
+
+/*****************************************************************************/
+/* Funktioner och bundna knappar *********************************************/
+/*****************************************************************************/
+
+// Manuell sortering av item i lista
+var list = document.getElementById('open');
+Sortable.create(list, {handle: '.subitem-right',onSort: function (evt) {
+    //console.log(evt.oldIndex + ' -> ' + evt.newIndex);
+    reorder(current.id, evt.oldIndex, evt.newIndex);
+    itemList.set_subitems(current.id);
+}});
+
+window.addEventListener("awesomplete-selectcomplete", function(e){
+    console.log($("#parent").val());
+    str = $("#parent").val()
+    pos = str.indexOf("#");
+    id = parseInt(str.substr(pos+1));
+    $(".item-parent-id").val(id);
+}, false);
+
+$(document).on('focus', "#parent", function() {
+ $("#parent").val("");
+
+
+});
+
+
+
+// .subitem-left (edit-läge)
 $(document).on('click', ".subitem-left", function() {
-	
-	id = $(this).parent().find(".item_id").text();
-	edit_item = itemList.get_item(id);
- 
-	$(".menu-title").html("Edit: "+edit_item.title);
+    
+    var id = $(this).parent().find(".item_id").text();
+    var edit_item = itemList.get_item(id);
+    var edit_parent = itemList.get_item(edit_item.parent_id);
+    
+    scroll_position = $("body").scrollTop();
+    //console.log(scroll_position);
+    
+    for (var key in edit_item) {
+        $('#edit-item-form [name="'+key+'"]').val(edit_item[key]);
+    }
+    
+    $("#parent").val(edit_parent.title+" #"+edit_parent.id);
+    
+    // drop down med bilder plugin
+    edit_item_prio.setIndexByValue(edit_item.prio);
+    edit_item_type.setIndexByValue(edit_item.type);
+    
+    
+    /*
+    $(".menu-title").html("Edit: "+edit_item.title);
 	
   	$("input.item-id").val(id);
   	$("input.item-title").val(edit_item.title);
   	$("textarea.item-notes").val(edit_item.notes);
-	$(".item-prio").val(edit_item.prio);
-  	$(".item-type").val(edit_item.type);
   	$(".item-size").val(edit_item.size);
 	$(".finish_date").val(edit_item.finish_date);
+    $(".update_date").val(edit_item.update_date);
 	$(".start_date").val(edit_item.start_date);
 	$(".icon").val(edit_item.icon);
-  	$("input.item-parent-id").val(edit_item.parent_id);
+    $("input.item-parent-id").val(edit_item.parent_id);
 	$("#postpone").val(edit_item.postpone);
-		/*$("input.item-category").val(current.category);
-     $("input.item-create-date").val(current.date_create);
-     $("input.item-finish-date").val(current.date_finished);*/
+    //$("#order").val(edit_item.order);
+    $("#repeat").val(edit_item.repeat);
+    $("#order").val(edit_item.order);
+    $("#parent").val(edit_parent.title+" #"+edit_parent.id);
+    */
+      
+ 
+    
 			
 	$(".page").hide();
 	$("#edit").show();
@@ -49,7 +127,13 @@ $(document).on('click', ".subitem-left", function() {
 // .subitem-center (visa subitems)
 $(document).on('click', ".subitem-center", function() {
 	var current_id = $(this).parent().find(".item_id").text();
-	view_item (current_id);
+    $("#search-item").val("");
+    /*
+    if (view == "tree") view_item (current_id);
+    else if (view == "filter") view_item (itemList.get_item(current_id).parent_id);
+    */
+    window.scrollTo(0, 0);
+    view_item (current_id);
  });
  
  
@@ -57,24 +141,29 @@ $(document).on('click', ".subitem-center", function() {
 // .new-button
 $(document).on('click', ".new-button", function() {
 
-	$(".menu-title").html("New: "+current.title);
-   $("input.item-id").val(current.id);
-   $("#new-item-title").val("");
-   $("#new-item-prio").val("2");
-   $("#new-item-type").val("6"); 
-   $("#new-item-notes").val("");
-   $("#new-item-size").val("6");
-   $("#new-parent-id").val(current.id);
+    $(".menu-title").html("New: "+current.title);
+    $("input.item-id").val(current.id);
+    $("#new-item-title").val("");
+    $("#new-item-notes").val("");
+    $("#new-item-size").val("6");
+    $("#new-item-postpone").val(undefined);
+    $("#new-parent-id").val(current.id);
+    $("#new-order").val(itemList.get_min_order(current.id)-1);
 	
+    //drop down med bilder plugin
+    new_item_prio.setIndexByValue("6"); 
+    new_item_type.setIndexByValue("4"); //idé
+    
 	$(".page").hide();
 	$("#new").show();
 	
-	window.scrollTo(0, 0);
+    $("#new-item-title").focus();
+  	window.scrollTo(0, 0);
  });
 
 // .add-button
 $(document).on('click', ".add-button", function() {
-     itemList.add_from_form("#new-item-form");
+    itemList.add_from_form("#new-item-form");
 	view_item(current.id);
  });
 
@@ -84,8 +173,7 @@ $(document).on('click', ".save-button", function() {
    itemList.edit_from_form("#edit-item-form");
 	if(view=="tree")	view_item(current.id);
 	else view_filter();
-	var scroll_offset = $(".item_id:contains('"+id+"')").parent().offset().top-100;
-    window.scrollTo(0, scroll_offset);
+    $("body").scrollTop(scroll_position);
  });
 
 
@@ -98,31 +186,94 @@ $(document).on('click', ".more-button", function() {
 // .back-button
  $(document).on('click', ".back-button", function() {
 	view_item(current.parent_id);
+    $("#search-item").val("");
  });
 
-//swipe back
+// swipe back
 $("#tree").on('swiperight',  function(){ 
-	if(current.parent_id!=-1)
+	$("#search-item").val("");
+    if(current.parent_id!=-1)
 		view_item(current.parent_id);
 });
 
-//swipe to backend menu
+// byta till search
 $("#tree").on('swipeleft',  function(){ 
-	if(Date.now()  - latest_swipe <1000){
-		alert("2 left swipes -> Backdoor menu");
-		$(".page").hide();
-		$("#menu").show();
-	}
-	latest_swipe = Date.now();
+    view_filter();
 });
 
+// byt till tree
+$("#search").on('swiperight',  function(){ 
+    view_item(current.id);
+});
+
+// gear button (preferences)
+$(document).on('click', ".pref-button", function(){ 
+        
+        var preferences = JSON.parse(window.localStorage.getItem("wiseguy_preferences"));
+        
+        $("#slot1").val(preferences.slot1); 
+        $("#slot2").val(preferences.slot2); 
+        $("#slot3").val(preferences.slot3); 
+        $("#slot4").val(preferences.slot4); 
+        $("#slot5").val(preferences.slot5); 
+        $("#slot6").val(preferences.slot6); 
+        
+        $("#star_icon").val(preferences.star_icon); 
+        
+        $("#background_color").val(preferences.background_color); 
+        $("#controls_color").val(preferences.controls_color); 
+        
+        var open_items = itemList.get_all_items().query("finish_date","==","");
+        var finished_items = itemList.get_all_items().query("finish_date","!=","");
+        var prio1 = open_items.query("prio","==","1");
+        var prio2 = open_items.query("prio","==","2");
+        var prio3 = open_items.query("prio","==","3");
+        var prio4 = open_items.query("prio","==","4");
+        var prio5 = open_items.query("prio","==","5");
+        
+        var projects = open_items.query("type","==","7");
+        var tasks = open_items.query("type","==","6");
+        var problems = open_items.query("type","==","5");
+        var visions = open_items.query("type","==","15");
+        var ideas = open_items.query("type","==","4");
+        var categories = open_items.query("type","==","13");
+        
+        
+        //console.log("Open:"+open_items.length+" Finished:"+finished_items.length);
+        $("#statistics").empty();
+        $("#statistics").append("<br/>Finished:"+finished_items.length);
+        $("#statistics").append("<br/>Open:"+open_items.length);
+        $("#statistics").append("<br/>Prio1:"+prio1.length);
+        $("#statistics").append("<br/>Prio2:"+prio2.length);
+        $("#statistics").append("<br/>Prio3:"+prio3.length);
+        $("#statistics").append("<br/>Prio4:"+prio4.length);
+        $("#statistics").append("<br/>Prio5:"+prio5.length);
+        
+        $("#statistics").append("<br/><br/>Projects:"+projects.length);
+        $("#statistics").append("<br/>Tasks:"+tasks.length);
+        $("#statistics").append("<br/>Problems:"+problems.length);
+        $("#statistics").append("<br/>Visions:"+visions.length);
+        $("#statistics").append("<br/>Ideas:"+ideas.length);
+        $("#statistics").append("<br/>Categories:"+categories.length);
+        
+        //$("#statistics").append("<br/>Month: "+moment().format("M"));
+        
+        new_items = itemList.get_all_items().filter(function (item){
+            return moment(item["start_date"],"YYYY-MM-DD").format("M") == 11; 	
+	    });
+		
+        console.log(new_items);
+        $("#statistics").append("<br/>New: "+new_items.length);
+        
+        $(".page").hide();
+		$("#menu").show();
+});
 
 // .cancel-button
 $(document).on('click', ".cancel-button", function() {
   	if(view=="tree")	view_item(current.id);
 	else view_filter();
-	var scroll_offset = $(".item_id:contains('"+id+"')").parent().offset().top-100;
-   window.scrollTo(0, scroll_offset);
+    $("body").scrollTop(scroll_position);
  });
 
 // .delete-button
@@ -132,25 +283,33 @@ $(document).on('click', ".delete-button", function() {
    itemList.remove_item(id);
 	if(view=="tree")	view_item(current.id);
 	else view_filter();
+    $("body").scrollTop(scroll_position);
 	}
  });
  
  // .finish-button
 $(document).on('click', ".finish-button", function() {
-      id = $(".item-id").val();
-      itemList.edit_from_form("#edit-item-form");
-      itemList.finish_item(id);
-		if(view=="tree")	view_item(current.id);
-		else view_filter();
+        item = itemList.get_item($(".item-id").val());
+        itemList.edit_from_form("#edit-item-form");
+        
+        if(item.repeat){
+            var item_copy = itemList.copy_item(item.id);
+            item_copy["postpone"] = moment().add( item.repeat, 'days').format('YYYY-MM-DD');      
+        }
+        
+        itemList.finish_item(item.id);
+	    
+        if(view=="tree")	view_item(current.id);
+	    else view_filter();
+        
+        $("body").scrollTop(scroll_position);
+        
  });
 
+$(document).on('change', "#edit-item-order", function() {
+    $("#order").val($("#edit-item-order").val());
 
-// .menu-button
- $(document).on('click', ".menu-button", function() {
-     	$(".page").hide();
-		$("#menu").show();
- });
-
+});
 
 // .search-button
 $(document).on('click', ".search-button", function() {
@@ -162,32 +321,261 @@ $(document).on('click', ".tree-button", function() {
 	view_item(current.id);
  });
 
+// Reset filter buttot
+$(document).on('click', ".reset-filter", function() {
+    itemList.update_postpone();
+    $('.search').val('');  
+    $('.type-filter').val('');
+    $('.status-filter').val('open');
+    $('.path-filter').val(''); 
+    $('.type-filter').val('');  
+    $('.prio-filter').val('5'); 
+    $('#controls-title').hide(); 
+    view_filter();
+});
+
+
+
 function view_item (id) {
 	view = "tree";
 	current = itemList.get_item(id);
 	
-	itemList.refresh(id);
-	$(".menu-title").html(current.title);
-	if(current.id == 0) $("#tree>.submenu>.back-button").hide(); 
-	else $("#tree>.submenu>.back-button").show();
+    // time measurements
+    var timeInMs = Date.now();
+    var diff;
+    var output = "";
+    
+    $(".menu-title").html(itemList.get_item(id).title);
+	// var query = $("#search-item").val().toLowerCase();
+    
+    // gömma Back-knapp för Root item
+	if(id == 0) $("#tree>.controls>.back-button").hide(); 
+	else $("#tree>.controls>.back-button").show();
+    //filtrera array med items
+    open_items = itemList.get_all_items().query("finish_date","==","").query("parent_id", "==", id);
+    /*open_items = open_items.filter(function (item){
+     	return item["title"].toLowerCase().indexOf(query) !== -1 | item["notes"].toLowerCase().indexOf(query) !== -1; 	
+	});*/
+    
+    finished_items = itemList.get_all_items().query("finish_date","!=","").query("parent_id", "==", id);
+    
+    // sortera array med items
+	open_items.sort(
+	 	firstBy(function (v1, v2) { return v1.order - v2.order; })
+        .thenBy(function (v1, v2) { return v1.update_date<v2.update_date ? -1 : v1.update_date>v2.update_date ? 1 : 0; })
+	);
 
+	// rensa listor
+    $("#open").empty();
+    $("#finished").empty();
+		
+    //mata ut open_items med mustache
+    open_items.forEach(function(item) {
+        var template = $('#open_items_template').html();
+        var html = Mustache.to_html(template, item);
+    	$("#open").append(html);
+    }); 
+    
+    //mäta tid för att visa lista
+    /*diff = Date.now() - timeInMs;
+    timeInMs = Date.now();
+    output = output + "totel: " + diff + " ms\n";
+    
+    alert(output);
+    */
+    
+    
+    // om listan är tom
+    if (open_items.length==0) $("#open").append("<div class='empty'>No open items</div>");
+    if (finished_items.length != 0) $("#finished").append("<br/><center><button onclick='to_finished();'>View finished ("+finished_items.length+")</button></center>");
+    
+    // byta sida 
 	$(".page").hide();
 	$("#tree").show();
 }
 
-//search
+function to_finished(){
+    $(".search").val("");
+    $(".path-filter").val(current.path+current.title);   
+    $(".status-filter").val("finished");
+    $(".type-filter").val("");
+    $(".prio-filter").val("6");
+    //$('.controls-extra').show();
+    view_filter();    
+}
+
+
+function to_search(){
+    $(".search").val("");
+    $(".path-filter").val(current.path+current.title);   
+    $(".status-filter").val("open");
+    $(".prio-filter").val("6");  
+    $('.controls-extra').hide();
+    $('#controls-title').show();
+    $(".type-filter").val("");
+    view_filter();    
+}
+
+function togggleStatus(){
+    if($(".status-filter").val()=="open")$(".status-filter").val("finished");
+    else $(".status-filter").val("open");
+    view_filter();       
+}
+
+//filter
  function view_filter(){
-     view = "filter";
-     
-     var query = $(".search").val();
-     var type = $(".type-filter").val();
-     
-     itemList.filtered(type, query); 
-     //$("#filtered>.subitem").show();
-     //if(query!="") $("#filtered>.subitem>.subitem-center>.title:not(:contains('"+query+"'))").parent().parent().hide();
-     //else $("#filtered>.subitem").show();
-     
-     $(".page").hide();
-	  $("#search").show();
- }
+    // spara view för att backa rätt från edit
+    view = "filter";
     
+    itemList.update_postpone();
+    
+    // ladda in filtervärden
+    var query = $(".search").val();
+    var type = $(".type-filter").val();
+    var status = $(".status-filter").val();
+    var path = $(".path-filter").val();
+    var prio = $(".prio-filter").val();
+    
+    // sätta knapp bakgrund om filter är aktivt 
+    if(query) $(".title-button").css("background", "yellow"); else $(".title-button").css("background", ""); 
+    if(type) $(".type-button").css("background", "yellow"); else $(".type-button").css("background", ""); 
+    if(path) $(".path-button").css("background", "yellow"); else $(".path-button").css("background", "");
+    if(status != "open") {$(".status-button").css("background", "darkgray");$(".status-button").html('Finished');} 
+    else {$(".status-button").css("background", "");$(".status-button").html('Open')} 
+    
+    // skapa path knappar 
+    $("#path-buttons").empty();
+    var root_items = itemList.get_all_items().query("parent_id", "==", "0");
+    root_items .sort(
+     	firstBy(function (v1, v2) { return v1.order - v2.order; })
+        .thenBy(function (v1, v2) { return v1.title<v2.title ? -1 : v1.title>v2.title ? 1 : 0; })
+	);
+    root_items.forEach(function(item) {
+        var template = $('#path_button_template').html();
+        var html = Mustache.to_html(template, item);
+    	$("#path-buttons").append(html);
+    });
+    
+    
+    
+    // ladda in alla items 
+    filtered_items = itemList.get_all_items();
+    
+    // filtrera title om fält är satt
+    if (query) filtered_items = filtered_items.query("title", "contains", query);
+    
+    // filtrera path om fält är satt
+    if (path) filtered_items = filtered_items.query("path", "contains", path);
+
+    // filtrera type om fält är satt
+    if (type) filtered_items = filtered_items.query("type","==", type);
+    
+    // filtrera type om fält är satt
+    if (prio) filtered_items = filtered_items.query("prio","<", prio+1);
+    
+    // begränsa sökning till prioriterade om för få filter är satta
+    //if (query=="") filtered_items = filtered_items.query("prio", "<", 6);
+    
+    // filtrera på öppna eller avslutade
+    if (status == "open") 
+        filtered_items = filtered_items.query("finish_date","==","");
+    else 
+        filtered_items = filtered_items.query("finish_date","!=","");
+    
+    // sortera items
+    if (status == "open")
+        filtered_items .sort(
+    	 	firstBy(function (v1, v2) { return v1.postpone.localeCompare(v2.postpone); })
+    		.thenBy(function (v1, v2) { return v1.prio - v2.prio; }) 
+            .thenBy(function (v1, v2) { if(v2.update_date != undefined & v2.update_date != undefined) return v2.update_date.localeCompare(v1.update_date); else return 0; })
+               		//.thenBy(function (v1, v2) { return v1.path.localeCompare(v2.path); })
+    	);
+    else if (status == "finished")
+    	filtered_items .sort( function (v1, v2) { return v2.finish_date.localeCompare(v1.finish_date); });    
+   
+    /* else if (sort_order == "old")
+        filtered_items .sort( function (v1, v2) { return v1.start_date.localeCompare(v2.start_date); });    
+    */
+    
+    //rensa lista
+	$("#filtered").empty();
+    
+    // mata ut items med mustache
+    filtered_items.forEach(function(item) {
+        var template = $('#filtered_items_template').html();
+    	var html = Mustache.to_html(template, item);
+    	$("#filtered").append(html);
+    }); 
+    
+    // om inga item finns 
+    if (filtered_items.length == 0)  $("#filtered").append("<div class='empty'>No items here</div>");
+     
+    // byta sida
+    $(".page").hide();
+	$("#search").show();
+    
+    // till toppen av sidan
+    window.scrollTo(0, 0);
+ }
+ 
+
+function reorder(item_id, from_pos, to_pos){
+    var items = itemList.get_subitems(item_id);
+    console.log(items);
+    var offset = 0;
+    
+    for (var index = 0, len = items.length; index < len; index++) {
+        item = items[index];
+        
+        if (from_pos >= to_pos){
+            if(index == (to_pos)) offset++;
+        }
+        else{
+            if (index == (to_pos+1)) offset++;
+        }
+        
+        if(index == from_pos) offset--;
+        item.order = index + offset;
+        if(index == from_pos) item.order = to_pos;
+    }
+    
+    itemList.save_to_storage(); 
+}
+
+function set_preferences(){
+    preferences = JSON.parse(window.localStorage.getItem("wiseguy_preferences"));
+
+    //$(".search").val(preferences.slot1);
+    
+    $("#prefefined").html("");
+
+    var template = $('#filter_buttons_template').html();
+    //var template = "<button>{{icon}}</button>";
+	var html = Mustache.to_html(template, preferences);
+	$("#prefefined").append(html);
+    
+    $(".controls").css("background",preferences.controls_color);
+    $("body").css("background",preferences.background_color);
+    $(".header").css("background",preferences.background_color);
+}
+
+
+function save_preferences(){
+    var slot1 =  $("#slot1").val();
+    var slot2 =  $("#slot2").val();
+    var slot3 =  $("#slot3").val();
+    var slot4 =  $("#slot4").val();
+    var slot5 =  $("#slot5").val();
+    var slot6 =  $("#slot6").val();
+    var background_color =  $("#background_color").val();
+    var controls_color =  $("#controls_color").val();
+    var star_icon = $("#star_icon").val();
+    
+    var buttons = {slot1:slot1, slot2:slot2, slot3:slot3, slot4:slot4, slot5:slot5, slot6:slot6,  background_color: background_color, controls_color:controls_color, star_icon: star_icon};
+    window.localStorage.setItem("wiseguy_preferences",JSON.stringify(buttons));
+    
+    
+    set_preferences();
+    
+    view_filter();   
+}

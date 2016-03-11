@@ -3,11 +3,14 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#535069;}
 
 #new{min-height:1000px;}
 #edit{min-height:1000px;}
+#tree{min-height:600px;}
+#search{min-height:600px;}
+
 /****************************************************************************/
 /****** HEADER **************************************************************/
 /****************************************************************************/
 
-    #header{
+    .header{
       padding:5px;
       background:#345;
       margin:0;
@@ -17,16 +20,24 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#535069;}
       display: block;
     }
     
-    .menu-title {margin-left:5px; width:240px; display:block; float:left; text-overflow:ellipsis; white-space:nowrap;overflow: hidden; font-size: 20px; text-shadow:1px 1px 1px #123;}
+    .menu-title {margin-left:5px; width:220px; display:block; float:left; text-overflow:ellipsis; white-space:nowrap;overflow: hidden; font-size: 20px; text-shadow:1px 1px 1px #123;}
     .new-button {float:right;}
     .back-button {float:left;}
-	 .cancel-button {float:left;}
-	 .add-button{float:right;}
+	.cancel-button {float:left;}
+	.add-button{float:right;}
 	 
+    .controls{background:#345;padding:5px; height:36px;}
+    .controls-extra{background:#345; padding:5px; overflow-x:hidden; min-width:100%-10px;;}
+    .show-control{display: inline-block;}
     .submenu{background:#345;padding:5px; height:36px;}
     .search{border-radius:3px;width:150px;}
-	 .type-filter {border-radius:3px;width:45%;}
+    .type-filter {border-radius:3px;width:45%;}
+    .status-filter {border-radius:3px;width:45%;}
+    .path-filter {border-radius:3px;width:45%;}
+    
+  /*  .search_input {background: url(img/search-input.png) no-repeat scroll 0px 0px; padding-left:30px; }*/
 	 
+.awesomplete{display:block;}
 
 button{
 	-moz-box-shadow:inset 0px 1px 0px 0px #e3e3e3;
@@ -35,13 +46,7 @@ button{
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e0e0e0), color-stop(1, #b5b3b5));
 	background:-moz-linear-gradient(top, #e0e0e0 5%, #b5b3b5 100%);
 	background:-webkit-linear-gradient(top, #e0e0e0 5%, #b5b3b5 100%);
-	background:-o-linear-gradient(top, #e0e0e0 5%, #b5b3b5 100%);
-	background:-ms-linear-gradient(top, #e0e0e0 5%, #b5b3b5 100%);
-	background:linear-gradient(to bottom, #e0e0e0 5%, #b5b3b5 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0e0e0', endColorstr='#b5b3b5',GradientType=0);
 	background-color:#e0e0e0;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
 	border-radius:6px;
 	border:1px solid #dcdcdc;
 	display:inline-block;
@@ -50,7 +55,7 @@ button{
 	font-family:Trebuchet MS;
 	font-size:15px;
 	font-weight:bold;
-	padding:6px 15px;
+	padding:6px 8px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #dbdbdb;
 }
@@ -67,6 +72,7 @@ button:hover {
 button:active {
 	position:relative;
 	top:1px;
+    background-color:#F00;
 }
 
 
@@ -74,32 +80,31 @@ button:active {
 /****************************************************************************/
 /****** ITEMS IN LIST **********************************************************/
 /****************************************************************************/
-.empty{background:#535069; margin-top:100px;color:gray; text-align: center;}
+.empty{margin-top:100px;color:#666; text-align: center;}
 
 .subitem{
   font-size: 10pt;
   padding-bottom: 3px;
-}
-
-.document{ 
-    background:url('img/itembg.png') center repeat-x;
-    background-size: auto 100%;
-    min-height:57px;
-    color: #333;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .project{ 
-    background:url('img/project-bg.png') center repeat-x;
+   /* background:url('img/project-bg.png') center repeat-x;*/
     background-size: auto 100%;
     min-height:70px;
     color: white;
 }
 
-.subitem-center{    width:auto;    padding-top:3px;     padding-left:3px;     overflow:hidden;    cursor:pointer;   min-height:60px;}
+.subitem-center{    width:auto;    padding-top:3px;     padding-left:3px;     overflow:hidden;    cursor:pointer;   min-height:60px; color:#555;}
 .subitem-left{ height:100%;   width:45px;    float:left;    cursor:pointer;}
 
-.title{overflow: hidden;    font-weight:bold;    height: 17px;    float:left;    display: block;    width:100%;}
-.notes {display: block;    font: italic 10px Arial;    color: #999;     margin-right:5px;   white-space: pre-line; }
+.title{overflow: hidden;    font-weight:bold;     float:left;    display: block;    width:100%;}
+.notes {font: italic 10px Arial;    color: #999;     margin-right:5px;   white-space: pre-line; }
 .postpone {font: italic 10px Arial;    color: CadetBlue;    margin-right:5px;   background:#345; padding:2px;}
 .subitem-next-action{color:#484; float: left;  display: block;  height: 17px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 .subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
@@ -114,7 +119,7 @@ button:active {
 .subitem .status {font-size:8px; display:block;margin-left: 5px;}
 .subitem .prio {font-size:8px; display:block;}
 
-.field-description{font-size:10px; display:block;color:gray;margin-left:5px;}
+.field-description{font-size:10px; display:block;color:white;margin-left:5px;}
 
 
 /****** FORM FIELDS *******/
@@ -123,3 +128,4 @@ select {  width:100%;  border: 0;  padding:5px;  margin:0;  font-size: 12pt;  co
 input {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
 .btn {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
 #postpone {display: block;    font: italic 12px Arial;    color: darkblue;    background: #DDD;    height: 30px;  margin-bottom:5px;   padding:3px;  margin-right:5px;   white-space: pre-line;}
+.dd {box-sizing: border-box;}
