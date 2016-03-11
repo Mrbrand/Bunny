@@ -5,14 +5,9 @@ var itemList = {
     
     exampledata : function() {   
   
-        var data = $.ajax({
-            type: 'GET',
-            url: 'exampledata.json',
-            success: function(data){return data;},
-            async: false
-        });
+        var data = '[{"title":"","prio":"6","type":"13","notes":"Root item - inte ändra!","parent_id":"-1","status":"open","id":"0","finish_date":"","path":"/","postpone":""}]'
         
-        window.localStorage.setItem(this.storageKey, data.responseText);    
+        window.localStorage.setItem(this.storageKey, data);    
     },
 	
 	init : function(key) {     
@@ -21,6 +16,7 @@ var itemList = {
         
         //om local storage är udefinierat
         if (local_storage==undefined) itemList.exampledata();
+		else if(local_storage=="undefined") itemList.exampledata();
         else if(local_storage==null) itemList.exampledata();
         else if(local_storage=="") itemList.exampledata();
         
