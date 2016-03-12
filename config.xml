@@ -16,8 +16,12 @@
     <author href="http://betarabbit.com" email="peter.brand79@gmail.com">
         Peter Brand 
     </author>
- <!-- Default application icon -->
+
+	<preference name="orientation" value="portrait" /> 
+
+<!-- Default application icon -->
 <icon src="img/icon.png" />
+
 <!--
     Default icon should work, but cordova don't overwrite
     the default on all densities
