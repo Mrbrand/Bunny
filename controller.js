@@ -152,8 +152,13 @@ $(document).on('click', ".new-button", function() {
 	
     //drop down med bilder plugin
     new_item_prio.setIndexByValue("6"); 
-    new_item_type.setIndexByValue("4"); //idé
     
+	//sätta type beroende på current.type
+	if (current.type == 6) new_item_type.setIndexByValue("4"); //task -> idé
+    else if (current.type == 13) new_item_type.setIndexByValue("7"); //category -> project
+    else new_item_type.setIndexByValue("6"); //task
+	
+	
 	$(".page").hide();
 	$("#new").show();
 	
