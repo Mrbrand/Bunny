@@ -4,7 +4,7 @@ No installation required, all data is saved locally. You can add WiseGuy as an a
 
 # Latest version 
 Klick this link to open the latest version of WiseGuy:
-https://rawgit.com/Mrbrand/WiseGuy/blob/master/index.html
+https://rawgit.com/Mrbrand/WiseGuy/master/index.html
 
 #Screenshots
 ![alt tag](https://raw.github.com/Mrbrand/WiseGuy/master/img/screenshot.png)
