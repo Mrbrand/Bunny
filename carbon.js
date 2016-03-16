@@ -5,7 +5,7 @@ var itemList = {
     
     exampledata : function() {   
   
-        var data = '[{"title":"","prio":"6","type":"13","notes":"Root item - inte ändra!","parent_id":"-1","status":"open","id":"0","finish_date":"","path":"/","postpone":""}]'
+        var data = '[{"title":"","prio":"6","type":"13","notes":"Root item - inte ändra!","parent_id":"-1","status":"open","id":"0","finish_date":"","path":"/","postpone":""}]';
         
         window.localStorage.setItem(this.storageKey, data);    
     },
