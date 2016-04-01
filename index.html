@@ -275,15 +275,34 @@
         			<option value="13" data-image="img/type13.png">Category</option>  
 				</select><br/>
                 
-                <select id="new-item-prio" class="drop_with_images" name="prio" style="width:100%; margin-bottom:5px;">
-                    <option value="1" data-image="img/prio1.png">Urgent</option>
-            		<option value="2" data-image="img/prio2.png">Important</option>
+          <select id="new-item-prio" class="drop_with_images" name="prio1" style="width:100%; margin-bottom:5px; display:none;">
+              <option value="1" data-image="img/prio1.png">Urgent</option>
+      		<option value="2" data-image="img/prio2.png">Important</option>
 					<option value="3" data-image="img/prio3.png">Significant</option>
 					<option value="4" data-image="img/prio4.png">Relevant</option>
 					<option value="5" data-image="img/prio5.png">Noteworthy</option>
                     <option value="6" data-image="img/prio6.png">No priority</option>    
                 </select><br/>
-                
+          
+				<input type="radio" name="prio" id="1" class="input-hidden" value="1" checked />
+        <label for="1"><img src="img/prio1.png" />  </label>
+
+				<input type="radio" name="prio" id="2" class="input-hidden" value="2" />
+        <label for="2"><img src="img/prio2.png" />  </label>
+
+				<input type="radio" name="prio" id="3" class="input-hidden" value="3" />
+        <label for="3"><img src="img/prio3.png" />  </label>
+
+				<input type="radio" name="prio" id="4" class="input-hidden" value="4" />
+        <label for="4"><img src="img/prio4.png" />  </label>
+
+				<input type="radio" name="prio" id="5" class="input-hidden" value="5" />
+        <label for="5"><img src="img/prio5.png" />  </label>
+
+				<input type="radio" name="prio" id="6" class="input-hidden" value="6" />
+        <label for="6"><img src="img/none.png" /> </label>
+
+
                 <input id="new-item-postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
                 
 				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="10"></textarea>

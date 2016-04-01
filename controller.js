@@ -151,8 +151,8 @@ $(document).on('click', ".new-button", function() {
     $("#new-order").val(itemList.get_min_order(current.id)-1);
 	
     //drop down med bilder plugin
-    new_item_prio.setIndexByValue("6"); 
-    
+    //new_item_prio.setIndexByValue("6"); 
+    $('input:radio[id='+5+']').prop('checked', true);
 	//sätta type beroende på current.type
 	if (current.type == 6) new_item_type.setIndexByValue("4"); //task -> idé
     else if (current.type == 13) new_item_type.setIndexByValue("7"); //category -> project
