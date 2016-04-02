@@ -74,26 +74,41 @@ $(document).on('focus', "#parent", function() {
 // . NEW BUTTON
 $(document).on('click', ".new-button", function() {
 
-    	$(".menu-title").html("New: "+current.title);
-    	$("input.item-id").val(current.id);
+    $(".menu-title").html("New: "+current.title); //titel i meny
+    
+    
+    $('#new-item-form input[name="title"]').val(""); //title
+    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+    $('#new-item-form input[name="postpone"]').val(undefined); //postpone
+    $('#new-item-form input[name="notes"]').val(""); //notes
+    
+    $('#new-item-form input[name="parent_id"]').val(current.id); //parent_id
+   
+	$('#new-item-form input[name="id"]').val(current.id); //id (hidden)
+   $('#new-item-form input[name="icon"]').val(itemList.get_min_order(current.id)-1); //order (hidden)
+    
+    //type beroende på parent type	
+    if (current.type == 6) new_item_type.setIndexByValue("4"); //task -> idé
+    else if (current.type == 13) new_item_type.setIndexByValue("7"); //category -> project
+    else new_item_type.setIndexByValue("6"); //task	
+    	
+    	/*$("input.item-id").val(current.id);
     	$("#new-item-title").val("");
     	$("#new-item-notes").val("");
-    	$("#new-item-size").val("6");
+    	//$("#new-item-size").val("6");
     	$("#new-item-postpone").val(undefined);
     	$("#new-parent-id").val(current.id);
-    	$("#new-order").val(itemList.get_min_order(current.id)-1);
-		$("#new-parent-id").val(current.id);
+    	$("#new-order").val(itemList.get_min_order(current.id)-1);*/
+		//$("#new-parent-id").val(current.id);
 		
-		$('#new-item-form input:radio[value='+5+']').prop('checked', true);
+		//$('#new-item-form input:radio[value='+5+']').prop('checked', true);
 		
 		
     //drop down med bilder plugin
     //new_item_prio.setIndexByValue("6"); 
     
 	//sätta type beroende på current.type
-	if (current.type == 6) new_item_type.setIndexByValue("4"); //task -> idé
-    else if (current.type == 13) new_item_type.setIndexByValue("7"); //category -> project
-    else new_item_type.setIndexByValue("6"); //task
+	
 	
 	
 	$(".page").hide();
@@ -121,7 +136,7 @@ $(document).on('click', ".subitem-left", function() {
     
     $(".menu-title").html("Edit: "+edit_item.title); //titel i meny
     
-    $('#edit-item-form input[name="id"]').val(edit_item.id); //id (hidden)
+   
     $('#edit-item-form input[name="title"]').val(edit_item.title); //title
     $('#edit-item-form input:radio[value="'+edit_item.prio+'"]').prop('checked', true); // prio (css trick med bilder)
     edit_item_type.setIndexByValue(edit_item.type); // type (dropdown plugin)
@@ -137,6 +152,7 @@ $(document).on('click', ".subitem-left", function() {
    $('#edit-item-form input[name="update_date"]').val(edit_item.update_date); //update_date
    $('#edit-item-form input[name="finish_date"]').val(edit_item.finish_date); //finish_date
 	
+	 $('#edit-item-form input[name="id"]').val(edit_item.id); //id (hidden)
    $('#edit-item-form input[name="icon"]').val(edit_item.icon); //order (hidden)
    
 	$(".page").hide();
