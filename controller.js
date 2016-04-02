@@ -70,89 +70,26 @@ $(document).on('focus', "#parent", function() {
 });
 
 
-
-// .subitem-left (edit-läge)
-$(document).on('click', ".subitem-left", function() {
-    
-    var id = $(this).parent().find(".item_id").text();
-    var edit_item = itemList.get_item(id);
-    var edit_parent = itemList.get_item(edit_item.parent_id);
-    
-    scroll_position = $("body").scrollTop();
-    //console.log(scroll_position);
-    
-    for (var key in edit_item) {
-        $('#edit-item-form [name="'+key+'"]').val(edit_item[key]);
-    }
-    
-    $("#parent").val(edit_parent.title+" #"+edit_parent.id);
-    
-    // drop down med bilder plugin
-    edit_item_prio.setIndexByValue(edit_item.prio);
-    edit_item_type.setIndexByValue(edit_item.type);
-    
-    
-    /*
-    $(".menu-title").html("Edit: "+edit_item.title);
-	
-  	$("input.item-id").val(id);
-  	$("input.item-title").val(edit_item.title);
-  	$("textarea.item-notes").val(edit_item.notes);
-  	$(".item-size").val(edit_item.size);
-	$(".finish_date").val(edit_item.finish_date);
-    $(".update_date").val(edit_item.update_date);
-	$(".start_date").val(edit_item.start_date);
-	$(".icon").val(edit_item.icon);
-    $("input.item-parent-id").val(edit_item.parent_id);
-	$("#postpone").val(edit_item.postpone);
-    //$("#order").val(edit_item.order);
-    $("#repeat").val(edit_item.repeat);
-    $("#order").val(edit_item.order);
-    $("#parent").val(edit_parent.title+" #"+edit_parent.id);
-    */
-      
  
-    
-			
-	$(".page").hide();
-	$("#edit").show();
-	
-	$('.more').hide();
-	$('.more-button').show();
-	
-	window.scrollTo(0, 0);
- });
- 
-
-// .subitem-center (visa subitems)
-$(document).on('click', ".subitem-center", function() {
-	var current_id = $(this).parent().find(".item_id").text();
-    $("#search-item").val("");
-    /*
-    if (view == "tree") view_item (current_id);
-    else if (view == "filter") view_item (itemList.get_item(current_id).parent_id);
-    */
-    window.scrollTo(0, 0);
-    view_item (current_id);
- });
- 
- 
- 
-// .new-button
+// . NEW BUTTON
 $(document).on('click', ".new-button", function() {
 
-    $(".menu-title").html("New: "+current.title);
-    $("input.item-id").val(current.id);
-    $("#new-item-title").val("");
-    $("#new-item-notes").val("");
-    $("#new-item-size").val("6");
-    $("#new-item-postpone").val(undefined);
-    $("#new-parent-id").val(current.id);
-    $("#new-order").val(itemList.get_min_order(current.id)-1);
-	
+    	$(".menu-title").html("New: "+current.title);
+    	$("input.item-id").val(current.id);
+    	$("#new-item-title").val("");
+    	$("#new-item-notes").val("");
+    	$("#new-item-size").val("6");
+    	$("#new-item-postpone").val(undefined);
+    	$("#new-parent-id").val(current.id);
+    	$("#new-order").val(itemList.get_min_order(current.id)-1);
+		$("#new-parent-id").val(current.id);
+		
+		$('#new-item-form input:radio[value='+5+']').prop('checked', true);
+		
+		
     //drop down med bilder plugin
     //new_item_prio.setIndexByValue("6"); 
-    $('input:radio[id='+5+']').prop('checked', true);
+    
 	//sätta type beroende på current.type
 	if (current.type == 6) new_item_type.setIndexByValue("4"); //task -> idé
     else if (current.type == 13) new_item_type.setIndexByValue("7"); //category -> project
@@ -165,6 +102,65 @@ $(document).on('click', ".new-button", function() {
     $("#new-item-title").focus();
   	window.scrollTo(0, 0);
  });
+
+
+// .subitem-left (edit-läge)
+$(document).on('click', ".subitem-left", function() {
+    
+    var id = $(this).parent().find(".item_id").text();
+    var edit_item = itemList.get_item(id);
+    var edit_parent = itemList.get_item(edit_item.parent_id);
+    
+    scroll_position = $("body").scrollTop();
+    
+    /*
+      Buggar för icon/postpone och strular till det med radio buttons 2016-04-02  
+    for (var key in edit_item) {
+        $('#edit-item-form .input_'+key).val(edit_item[key]);
+    }*/
+    
+    $(".menu-title").html("Edit: "+edit_item.title); //titel i meny
+    
+    $('#edit-item-form input[name="id"]').val(edit_item.id); //id (hidden)
+    $('#edit-item-form input[name="title"]').val(edit_item.title); //title
+    $('#edit-item-form input:radio[value="'+edit_item.prio+'"]').prop('checked', true); // prio (css trick med bilder)
+    edit_item_type.setIndexByValue(edit_item.type); // type (dropdown plugin)
+    $('#edit-item-form input[name="postpone"]').val(edit_item.postpone); //postpone
+    $('#edit-item-form input[name="notes"]').val(edit_item.notes); //notes
+    
+    $('#edit-item-form input[name="parent_id"]').val(edit_item.parent_id); //parent_id
+    		$("#parent").val(edit_parent.title+" #"+edit_parent.id); //parent med awesomplete
+  	 $('#edit-item-form input[name="repeat"]').val(edit_item.repeat); //repeat
+    $('#edit-item-form input[name="icon"]').val(edit_item.icon); //icon
+   
+  	$('#edit-item-form input[name="start_date"]').val(edit_item.start_date); //start_date
+   $('#edit-item-form input[name="update_date"]').val(edit_item.update_date); //update_date
+   $('#edit-item-form input[name="finish_date"]').val(edit_item.finish_date); //finish_date
+	
+   $('#edit-item-form input[name="icon"]').val(edit_item.icon); //order (hidden)
+   
+	$(".page").hide();
+	$("#edit").show();
+	
+	$('.more').hide();
+	$('.more-button').show();
+	
+	window.scrollTo(0, 0);
+ });
+ 
+ 
+// .subitem-center (visa subitems)
+$(document).on('click', ".subitem-center", function() {
+	var current_id = $(this).parent().find(".item_id").text();
+    $("#search-item").val("");
+    /*
+    if (view == "tree") view_item (current_id);
+    else if (view == "filter") view_item (itemList.get_item(current_id).parent_id);
+    */
+    window.scrollTo(0, 0);
+    view_item (current_id);
+ });
+ 
 
 // .add-button
 $(document).on('click', ".add-button", function() {

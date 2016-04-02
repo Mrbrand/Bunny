@@ -174,9 +174,13 @@
 				<br/><br/>
 			</div><!-- end controls--> 
 			
+			
 			<form id="edit-item-form">
-				<input class="item-title" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
 				
+			<! TITLE >
+				<input class="title" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
+				
+			<! TYPE >
 				<select id="edit-item-type" class="drop_with_images" name="type" style="width:100%; margin-bottom:5px;">
                     <option value="4" data-image="img/type4.png">Idea</option>
                     <option value="6" data-image="img/type6.png">Task</option>
@@ -187,59 +191,55 @@
 				</select>
                 
                
-                
-                <select id="edit-item-prio" class="drop_with_images" name="prio" style="width:100%; margin-bottom:5px;">
-                    <option value="1" data-image="img/prio1.png">Urgent</option>
-        			<option value="2" data-image="img/prio2.png">Important</option>
-					<option value="3" data-image="img/prio3.png">Significant</option>
-					<option value="4" data-image="img/prio4.png">Relevant</option>
-					<option value="5" data-image="img/prio5.png">Noteworthy</option>
-        			<option value="6" data-image="img/prio6.png">No priority</option>    
-                </select><br/>
-                
-                 <!--select id="order" name="order" style="width:50%; margin-bottom:5px; float:left;">
-                    <option value="0">Överst</option>
-    			</select><br/-->
-                
-               
+        <! PRIO>
+				 <div style="margin: 10px 0;">
+		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
+  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
+  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
+  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
+  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
+  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
+        		</div>
+           
+         <! POSTPONE >   
                 <span class="field-description">Postpone</span>    
 				<input id="postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
-                
-				
-				<!--button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val(moment().add(1, 'days').format('YYYY-MM-DD ddd'));">Tomorrow</button>	
-				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
-				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'week')).format('YYYY-MM-DD ddd'));">+1 week</button>
-				-->
-			  	
 									
-
+			<! NOTES >
 				<textarea class="item-notes" name="notes" rows="10" placeholder="Notes"></textarea>
 
+			<! MORE BUTTON >
 				<center>
 					<button class="more-button" type='button'>More options</button>
 				</center>
+				
 				<div class="more" style="display:none;">
-
                     <! hidden >
 					<input class="item-id" name="id" type="hidden" /> <br/>
     				<input class="item-parent-id" name="parent_id" type="hidden"/><br/>	
     				<input id="order" type="hidden" name="order" />
                     	
+                    	<! PARENT >
                     <span class="field-description">Parent item in tree</span>
-        			<input id="parent" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+        				<input id="parent" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
                     
+                    <! RESPAWN >
                     <span class="field-description">Make item respawn after finish</span>
                     <input id="repeat" type="text" name="repeat" placeholder="Respawn after ... days" style="margin-bottom:5px;height:40px; font-size:1.1em" /> <br/>
                                         
+                    <! ICON >                    
                     <span class="field-description">Custom icon</span>
                 	<input class="icon" name="icon" placeholder="Chose from your emojs" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
-                                                        
+     					
+     					<! CREATED >                                                   
                     <span class="field-description">Item created</span>
 					<input class="start_date" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>	
                     
+                 <! UPDATED >
                     <span class="field-description">Last updated</span>
     				<input class="update_date" name="update_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 					
+					<! FINISHED >
                     <span class="field-description">Finish date</span>
 					<input class="finish_date" name="finish_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 					
@@ -275,33 +275,24 @@
         			<option value="13" data-image="img/type13.png">Category</option>  
 				</select><br/>
                 
-          <select id="new-item-prio" class="drop_with_images" name="prio1" style="width:100%; margin-bottom:5px; display:none;">
+          <!--select id="new-item-prio" class="drop_with_images" name="prio1" style="width:100%; margin-bottom:5px; display:none;">
               <option value="1" data-image="img/prio1.png">Urgent</option>
       		<option value="2" data-image="img/prio2.png">Important</option>
 					<option value="3" data-image="img/prio3.png">Significant</option>
 					<option value="4" data-image="img/prio4.png">Relevant</option>
 					<option value="5" data-image="img/prio5.png">Noteworthy</option>
                     <option value="6" data-image="img/prio6.png">No priority</option>    
-                </select><br/>
+                </select><br/-->
           
-				<input type="radio" name="prio" id="1" class="input-hidden" value="1" checked />
-        <label for="1"><img src="img/prio1.png" />  </label>
-
-				<input type="radio" name="prio" id="2" class="input-hidden" value="2" />
-        <label for="2"><img src="img/prio2.png" />  </label>
-
-				<input type="radio" name="prio" id="3" class="input-hidden" value="3" />
-        <label for="3"><img src="img/prio3.png" />  </label>
-
-				<input type="radio" name="prio" id="4" class="input-hidden" value="4" />
-        <label for="4"><img src="img/prio4.png" />  </label>
-
-				<input type="radio" name="prio" id="5" class="input-hidden" value="5" />
-        <label for="5"><img src="img/prio5.png" />  </label>
-
-				<input type="radio" name="prio" id="6" class="input-hidden" value="6" />
-        <label for="6"><img src="img/none.png" /> </label>
-
+          <! PRIO>
+				 <div style="margin: 10px 0;">
+		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
+  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
+  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
+  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
+  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
+  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
+        		</div>
 
                 <input id="new-item-postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
                 

@@ -9,15 +9,28 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#535069;}
 /****************************************************************************/
 /****** HEADER **************************************************************/
 /****************************************************************************/
-.input-hidden {
+
+
+label > input{ /* HIDE RADIO */
+  display:none;
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
+  border:2px solid #f00;
+}
+
+/*.input-hidden {
   position: absolute;
   left: -9999px;
 }
 
 input[type=radio]:checked + label>img {
-  /*border: 1px solid #444;*/
+  /*border: 1px solid #444;
   box-shadow: 0 0 3px 3px #090;
-}
+}*/
 
 
     .header{
