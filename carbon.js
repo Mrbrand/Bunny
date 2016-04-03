@@ -123,13 +123,16 @@ var itemList = {
 	},
     
     get_next_action : function(id){
+        var item = this.get_item(id);
         var subitems = this.get_subitems(id);
-        subitems = subitems.query("type","!=","4");
-        subitems = subitems.query("type","!=","7");
-        subitems = subitems.query("type","!=","13");
-        subitems = subitems.query("type","!=","15");
-        //...
-      
+        
+        //om category
+        if(item.type=="13") subitems = subitems.query("type","==","7"); //bara visa projekt
+        //om projekt
+        if(item.type=="7") subitems = subitems.query("type","!=","6"); //bara visa tasks
+        //om task
+        if(item.type=="6") subitems = subitems.query("type","!=","4"); //bara visa ideas
+              
         var next_action = [];
         if (subitems[0] != undefined) next_action.push(subitems[0]);
         return next_action;
