@@ -156,7 +156,57 @@
 			
 		</div><!-- end page-->
 		
+		<!-- NEW item--------------------------------------------------------------------------->
+		<div id="new" class="page">
+			
+			<div class="header">
+				<div class="menu-title">-new item-</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="controls">
+				<button class="cancel-button">Cancel</button>
+				<button class="add-button">Add</button>
+			</div><!-- end controls--> 
 		
+			<form id="new-item-form">
+			  
+			  <! TITLE>
+				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
+			  <! TYPE>	
+				<select id="new-item-type" class="drop_with_images" name="type" style="width:100%; margin-bottom:5px;">
+                    <option value="4" data-image="img/type4.png">Idea</option>
+                    <option value="6" data-image="img/type6.png">Task</option>
+                    <option value="7" data-image="img/type7.png">Project</option>
+                    <option value="5" data-image="img/type5.png">Problem</option>
+                    <option value="15" data-image="img/type15.png">Vision</option> 
+        			<option value="13" data-image="img/type13.png">Category</option>  
+				</select><br/>
+          
+            <! PRIO>
+				 <div style="margin: 10px 0;">
+		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
+  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
+  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
+  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
+  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
+  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
+        		</div>
+		    <! POSTPONE>
+                <input id="new-item-postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
+         
+             <! NOTES>       
+				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="10"></textarea>
+				
+			 <! hidden >
+                <input type="hidden" name="order" id="new-order" />
+				<input type="hidden" name="parent_id" id="new-parent-id" value="0"/>
+				<input type="hidden" name="status" value="open" placeholder="Status" style="margin-bottom:5px;"/>
+				
+			</form>
+			<br/><br/><br/><br/><br/><br/><br/>
+		</div><!-- end new-item--> 
+				
 		
 		<!-- EDIT item ---------------------------------------------------------------------->
 		<div id="edit" class="page">
@@ -248,68 +298,8 @@
 			</form>
 		</div><!--edit-item--> 
 
-		<!-- NEW item--------------------------------------------------------------------------->
-		<div id="new" class="page">
-			
-			<div class="header">
-				<div class="menu-title">-new item-</div>
-			</div> <!--end header-->
-			
-			<!--Sub-meny-->
-			<div class="controls">
-				<button class="cancel-button">Cancel</button>
-				<button class="add-button">Add</button>
-			</div><!-- end controls--> 
-			
-			
-			
-			<form id="new-item-form">
-				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
-				
-				<select id="new-item-type" class="drop_with_images" name="type" style="width:100%; margin-bottom:5px;">
-                    <option value="4" data-image="img/type4.png">Idea</option>
-                    <option value="6" data-image="img/type6.png">Task</option>
-                    <option value="7" data-image="img/type7.png">Project</option>
-                    <option value="5" data-image="img/type5.png">Problem</option>
-                    <option value="15" data-image="img/type15.png">Vision</option> 
-        			<option value="13" data-image="img/type13.png">Category</option>  
-				</select><br/>
-                
-          <!--select id="new-item-prio" class="drop_with_images" name="prio1" style="width:100%; margin-bottom:5px; display:none;">
-              <option value="1" data-image="img/prio1.png">Urgent</option>
-      		<option value="2" data-image="img/prio2.png">Important</option>
-					<option value="3" data-image="img/prio3.png">Significant</option>
-					<option value="4" data-image="img/prio4.png">Relevant</option>
-					<option value="5" data-image="img/prio5.png">Noteworthy</option>
-                    <option value="6" data-image="img/prio6.png">No priority</option>    
-                </select><br/-->
-          
-          <! PRIO>
-				 <div style="margin: 10px 0;">
-		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
-  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
-  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
-  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
-  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
-  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
-        		</div>
 
-                <input id="new-item-postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
-                
-				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="10"></textarea>
-				
-                <input type="hidden" name="order" id="new-order" />
-				<input type="hidden" name="parent_id" id="new-parent-id" value="0"/>
-				<input type="hidden" name="status" value="open" placeholder="Status" style="margin-bottom:5px;"/>
-				
-			</form>
-			<br/><br/><br/><br/><br/><br/><br/>
-		</div><!-- end new-item--> 
-	
-	</body>
-</html>
-
-
+		
 
 <!MENU >
 		<div id="menu" class="page">
@@ -378,6 +368,7 @@
 				{{#subitems}}
 					<img style="margin:4px 0px 4px 5px;height:10px;vertical-align: text-top;" src="img/type{{type}}.png"/>
 					<span class="next_action">{{title}}</span>
+					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
                     {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}<br/>
 				{{/subitems}}
 			</div>
