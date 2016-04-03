@@ -351,6 +351,33 @@ $(document).on('click', ".reset-filter", function() {
     view_filter();
 });
 
+function to_finished(){
+    $(".search").val("");
+    $(".path-filter").val(current.path+current.title);   
+    $(".status-filter").val("finished");
+    $(".type-filter").val("");
+    $(".prio-filter").val("6");
+    //$('.controls-extra').show();
+    view_filter();    
+}
+
+
+function to_search(){
+    $(".search").val("");
+    $(".path-filter").val(current.path+current.title);   
+    $(".status-filter").val("open");
+    $(".prio-filter").val("6");  
+    $('.controls-extra').hide();
+    $('#controls-title').show();
+    $(".type-filter").val("");
+    view_filter();    
+}
+
+function togggleStatus(){
+    if($(".status-filter").val()=="open")$(".status-filter").val("finished");
+    else $(".status-filter").val("open");
+    view_filter();       
+}
 
 
 function view_item (id) {
@@ -411,33 +438,6 @@ function view_item (id) {
 	$("#tree").show();
 }
 
-function to_finished(){
-    $(".search").val("");
-    $(".path-filter").val(current.path+current.title);   
-    $(".status-filter").val("finished");
-    $(".type-filter").val("");
-    $(".prio-filter").val("6");
-    //$('.controls-extra').show();
-    view_filter();    
-}
-
-
-function to_search(){
-    $(".search").val("");
-    $(".path-filter").val(current.path+current.title);   
-    $(".status-filter").val("open");
-    $(".prio-filter").val("6");  
-    $('.controls-extra').hide();
-    $('#controls-title').show();
-    $(".type-filter").val("");
-    view_filter();    
-}
-
-function togggleStatus(){
-    if($(".status-filter").val()=="open")$(".status-filter").val("finished");
-    else $(".status-filter").val("open");
-    view_filter();       
-}
 
 //filter
  function view_filter(){
@@ -472,8 +472,6 @@ function togggleStatus(){
         var html = Mustache.to_html(template, item);
     	$("#path-buttons").append(html);
     });
-    
-    
     
     // ladda in alla items 
     filtered_items = itemList.get_all_items();

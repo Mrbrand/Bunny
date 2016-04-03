@@ -65,7 +65,7 @@ var itemList = {
         //inte ta med allt (sub-sub)
         var subitems_clean = [];
         subitems.forEach(function(item) {
-            subitems_clean.push({title: item.title, type: item.type, postpone: item.postpone})
+            subitems_clean.push({title: item.title, type: item.type, postpone: item.postpone, prio: item.prio});
         }); 
         
         item.subitems = subitems_clean;
@@ -228,6 +228,8 @@ var itemList = {
 	},
 	
     
+    
+    
     set_item_field : function(id, field, value){
         for(var i in this.itemArray){
 			if(this.itemArray[i].id==id){
@@ -239,25 +241,29 @@ var itemList = {
 		window.localStorage.setItem(this.storageKey, JSON.stringify(this.itemArray));
 	},
     
+    
+    
     get_all_items : function(){
         return this.itemArray;
 	},
 
     
+    
     get_subitems : function(id){
-    	//filtrera på parent_id och prio
-        var subitems = this.itemArray.filter(function (item){
-			return item.parent_id == id & item.finish_date === "";
-		});
+    		//filtrera på parent_id och finished
+        	var subitems = this.itemArray.filter(function (item){
+				return item.parent_id == id & item.finish_date === "";
+			});
 		
         //sortera 
         subitems.sort(
-	 	firstBy(function (v1, v2) { return v1.order - v2.order; })
-        .thenBy(function (v1, v2) { return v1.title<v2.title ? -1 : v1.title>v2.title ? 1 : 0; })
-	    );
-        
-        return subitems;
+	 			firstBy(function (v1, v2) { return v1.order - v2.order; })
+        		.thenBy(function (v1, v2) { return v1.title<v2.title ? -1 : v1.title>v2.title ? 1 : 0; })
+	    );  
+       return subitems;
 	},
+	
+	
 	
 	get_path : function(id){
 			var path = "/";
