@@ -77,7 +77,7 @@ $(document).on('click', ".new-button", function() {
     $(".menu-title").html("New: "+current.title); //titel i meny
     
     
-    $('#new-item-form input[name="title"]').val(""); //title
+    $('#new-item-form textarea[name="title"]').val(""); //title
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input[name="postpone"]').val(undefined); //postpone
     $('#new-item-form input[name="notes"]').val(""); //notes
@@ -135,25 +135,24 @@ $(document).on('click', ".subitem-left", function() {
     }*/
     
     $(".menu-title").html("Edit: "+edit_item.title); //titel i meny
-    
-   
+     
     $('#edit-item-form input[name="title"]').val(edit_item.title); //title
     $('#edit-item-form input:radio[value="'+edit_item.prio+'"]').prop('checked', true); // prio (css trick med bilder)
     edit_item_type.setIndexByValue(edit_item.type); // type (dropdown plugin)
     $('#edit-item-form input[name="postpone"]').val(edit_item.postpone); //postpone
-    $('#edit-item-form input[name="notes"]').val(edit_item.notes); //notes
+    $('#edit-item-form textarea[name="notes"]').val(edit_item.notes); //notes
     
     $('#edit-item-form input[name="parent_id"]').val(edit_item.parent_id); //parent_id
     		$("#parent").val(edit_parent.title+" #"+edit_parent.id); //parent med awesomplete
-  	 $('#edit-item-form input[name="repeat"]').val(edit_item.repeat); //repeat
+  	$('#edit-item-form input[name="repeat"]').val(edit_item.repeat); //repeat
     $('#edit-item-form input[name="icon"]').val(edit_item.icon); //icon
    
   	$('#edit-item-form input[name="start_date"]').val(edit_item.start_date); //start_date
-   $('#edit-item-form input[name="update_date"]').val(edit_item.update_date); //update_date
-   $('#edit-item-form input[name="finish_date"]').val(edit_item.finish_date); //finish_date
+   	$('#edit-item-form input[name="update_date"]').val(edit_item.update_date); //update_date
+   	$('#edit-item-form input[name="finish_date"]').val(edit_item.finish_date); //finish_date
 	
 	 $('#edit-item-form input[name="id"]').val(edit_item.id); //id (hidden)
-   $('#edit-item-form input[name="icon"]').val(edit_item.icon); //order (hidden)
+   	 $('#edit-item-form input[name="order"]').val(edit_item.order); //order (hidden)
    
 	$(".page").hide();
 	$("#edit").show();
