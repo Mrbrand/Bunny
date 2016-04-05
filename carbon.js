@@ -73,6 +73,15 @@ var itemList = {
         window.localStorage.setItem(this.storageKey, JSON.stringify(this.itemArray));
     },
     
+    get_quicklist: function (){
+		var quicklist = [];
+		var open_items = this.get_all_items().query("finish_date","==","");
+		open_items.forEach(function(item) {
+			quicklist.push(item.title+" #"+item.id);
+		}); 
+    	return quicklist;
+    }, 
+    
 	get_item : function(item_id){
 		return this.itemArray.filter(function (item){
 			return item.id == item_id;

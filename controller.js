@@ -13,7 +13,6 @@ var new_item_type =  $("#new-item-type").msDropDown().data("dd");
 var preferences = {};
 var scroll_position = 0;
 
-var quick_list_items = [];
 var input_parent = document.getElementById("parent");
 var awesomplete = new Awesomplete(input_parent);
 
@@ -25,12 +24,7 @@ else if(itemList.itemArray==null) itemList.exampledata();
 view_item(0);
 
 
-// Initiera snabblista med awesomplete
-var open_items = itemList.get_all_items().query("finish_date","==","");
-open_items.forEach(function(item) {
-    quick_list_items.push(item.title+" #"+item.id);
-}); 
-awesomplete.list = quick_list_items;
+awesomplete.list = itemList.get_quicklist();
 
 // Initiera Inställningar från local storage  
 var preferences = window.localStorage.getItem("wiseguy_preferences");
@@ -80,12 +74,12 @@ $(document).on('click', ".new-button", function() {
     $('#new-item-form textarea[name="title"]').val(""); //title
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input[name="postpone"]').val(undefined); //postpone
-    $('#new-item-form input[name="notes"]').val(""); //notes
+    $('#new-item-form textarea[name="notes"]').val(""); //notes
     
     $('#new-item-form input[name="parent_id"]').val(current.id); //parent_id
    
 	$('#new-item-form input[name="id"]').val(current.id); //id (hidden)
-   $('#new-item-form input[name="icon"]').val(itemList.get_min_order(current.id)-1); //order (hidden)
+   $('#new-item-form input[name="order"]').val(itemList.get_min_order(current.id)-1); //order (hidden)
     
     //type beroende på parent type	
     if (current.type == 6) new_item_type.setIndexByValue("4"); //task -> idé
@@ -180,6 +174,7 @@ $(document).on('click', ".subitem-center", function() {
 // .add-button
 $(document).on('click', ".add-button", function() {
     itemList.add_from_form("#new-item-form");
+    awesomplete.list = itemList.get_quicklist();
 	view_item(current.id);
  });
 
@@ -187,6 +182,7 @@ $(document).on('click', ".add-button", function() {
 // .save-button
 $(document).on('click', ".save-button", function() {
    itemList.edit_from_form("#edit-item-form");
+   awesomplete.list = itemList.get_quicklist();
 	if(view=="tree")	view_item(current.id);
 	else view_filter();
     $("body").scrollTop(scroll_position);
