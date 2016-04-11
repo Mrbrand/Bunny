@@ -137,7 +137,7 @@ $(document).on('click', ".subitem-left", function() {
     $('#edit-item-form textarea[name="notes"]').val(edit_item.notes); //notes
     
     $('#edit-item-form input[name="parent_id"]').val(edit_item.parent_id); //parent_id
-    		$("#parent").val(edit_parent.title+" #"+edit_parent.id); //parent med awesomplete
+     $("#parent").val(edit_parent.title+" #"+edit_parent.id); //parent med awesomplete
   	$('#edit-item-form input[name="repeat"]').val(edit_item.repeat); //repeat
     $('#edit-item-form input[name="icon"]').val(edit_item.icon); //icon
    
@@ -362,8 +362,6 @@ function to_search(){
     $(".path-filter").val(current.path+current.title);   
     $(".status-filter").val("open");
     $(".prio-filter").val("6");  
-    $('.controls-extra').hide();
-    $('#controls-title').show();
     $(".type-filter").val("");
     view_filter();    
 }
@@ -447,13 +445,6 @@ function view_item (id) {
     var status = $(".status-filter").val();
     var path = $(".path-filter").val();
     var prio = $(".prio-filter").val();
-    
-    // sätta knapp bakgrund om filter är aktivt 
-    if(query) $(".title-button").css("background", "yellow"); else $(".title-button").css("background", ""); 
-    if(type) $(".type-button").css("background", "yellow"); else $(".type-button").css("background", ""); 
-    if(path) $(".path-button").css("background", "yellow"); else $(".path-button").css("background", "");
-    if(status != "open") {$(".status-button").css("background", "darkgray");$(".status-button").html('Finished');} 
-    else {$(".status-button").css("background", "");$(".status-button").html('Open')} 
     
     // skapa path knappar 
     $("#path-buttons").empty();
@@ -577,11 +568,13 @@ function save_preferences(){
     var slot4 =  $("#slot4").val();
     var slot5 =  $("#slot5").val();
     var slot6 =  $("#slot6").val();
+    var slot7 =  $("#slot7").val();
+    var slot8 =  $("#slot8").val();
     var background_color =  $("#background_color").val();
     var controls_color =  $("#controls_color").val();
     var star_icon = $("#star_icon").val();
     
-    var buttons = {slot1:slot1, slot2:slot2, slot3:slot3, slot4:slot4, slot5:slot5, slot6:slot6,  background_color: background_color, controls_color:controls_color, star_icon: star_icon};
+    var buttons = {slot1:slot1, slot2:slot2, slot3:slot3, slot4:slot4, slot5:slot5, slot6:slot6, slot7:slot7,slot8:slot8, background_color: background_color, controls_color:controls_color, star_icon: star_icon};
     window.localStorage.setItem("wiseguy_preferences",JSON.stringify(buttons));
     
     
