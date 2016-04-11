@@ -582,3 +582,22 @@ function save_preferences(){
     
     view_filter();   
 }
+
+// #import-button
+$(document).on('click', "#import-button", function() {
+    if (confirm('All current data will be deleted?')==true) {
+        window.localStorage.setItem(itemList.storageKey, $('#import').val());
+        itemList.init("wiseguy_items");
+        view_item(0);
+    }
+});
+ 
+// #export-button
+$(document).on('click', "#export-button", function() {
+    var items = itemList.get_all_items().query("finish_date","==","");
+    var items_string = JSON.stringify(items);
+    
+    $("#export").html(items_string);
+    $(".page").hide();
+    $("#export").show();
+});
