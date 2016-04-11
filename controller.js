@@ -596,7 +596,8 @@ $(document).on('click', "#import-button", function() {
 $(document).on('click', "#export-button", function() {
     var items = itemList.get_all_items().query("finish_date","==","");
     var items_string = JSON.stringify(items);
-    
+    console.log(items);
+    console.log(items_string);
     $("#export").html(items_string);
     $(".page").hide();
     $("#export").show();
