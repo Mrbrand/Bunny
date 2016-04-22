@@ -202,7 +202,7 @@
 		</div><!-- end new-item--> 
 				
 		
-		<!-- EDIT item ---------------------------------------------------------------------->
+<!-- EDIT item ---------------------------------------------------------------------->
 		<div id="edit" class="page">
 			
 			<div class="header">
@@ -233,10 +233,22 @@
                     <option value="15" data-image="img/type15.png" style="height:24px;">Vision</option> 
     				<option value="13" data-image="img/type13.png">Category</option>   
 				</select>
-                
+
+
+		<! CONTEXT>
+        		<span class="field-description">Context</span>  
+        		
+        		<div style="display:inline;">
+        			<input class="context-icon" name="icon" style="margin: 10px 0;  width:60px; height:40px; font-size:40px;text-align: center; background: transparent; border: none; > "/>
+           		</div>
+        		
+        		<div class="context" style="margin: 10px 0; display:inline;">
+		            <!...>
+        		</div>                
                
         <! PRIO>
-				 <div style="margin: 10px 0;">
+         		<span class="field-description">Prio</span>  
+         		<div style="margin: 10px 0;">
 		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
   						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
   						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
@@ -244,6 +256,7 @@
   						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
         		</div>
+
            
          <! POSTPONE >   
                 <span class="field-description">Postpone</span>    
@@ -271,11 +284,8 @@
                     <span class="field-description">Make item respawn after finish</span>
                     <input id="repeat" type="text" name="repeat" placeholder="Respawn after ... days" style="margin-bottom:5px;height:40px; font-size:1.1em" /> <br/>
                                         
-                    <! ICON >                    
-                    <span class="field-description">Custom icon</span>
-                	<input class="icon" name="icon" placeholder="Chose from your emojs" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
-     					
-     					<! CREATED >                                                   
+               	
+     			<! CREATED >                                                   
                     <span class="field-description">Item created</span>
 					<input class="start_date" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>	
                     

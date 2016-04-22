@@ -119,9 +119,16 @@ $(document).on('click', ".subitem-left", function() {
     var id = $(this).parent().find(".item_id").text();
     var edit_item = itemList.get_item(id);
     var edit_parent = itemList.get_item(edit_item.parent_id);
+    var icon;
     
     scroll_position = $("body").scrollTop();
     
+    $(".context").empty();
+    for (i = 1; i <= 8; i++) { 
+    	icon = preferences['slot'+i];
+		$(".context").append('<button onclick="set_context_icon(\'' +icon+'\');" type="button" style="margin-left:5px;">'+icon+'</button>');
+	}
+        
     /*
       Buggar för icon/postpone och strular till det med radio buttons 2016-04-02  
     for (var key in edit_item) {
@@ -132,6 +139,7 @@ $(document).on('click', ".subitem-left", function() {
      
     $('#edit-item-form input[name="title"]').val(edit_item.title); //title
     $('#edit-item-form input:radio[value="'+edit_item.prio+'"]').prop('checked', true); // prio (css trick med bilder)
+    $('#edit-item-form input:radio[value="'+edit_item.icon+'"]').prop('checked', true); // prio (css trick med bilder)
     edit_item_type.setIndexByValue(edit_item.type); // type (dropdown plugin)
     $('#edit-item-form input[name="postpone"]').val(edit_item.postpone); //postpone
     $('#edit-item-form textarea[name="notes"]').val(edit_item.notes); //notes
@@ -218,6 +226,12 @@ $("#search").on('swiperight',  function(){
     view_item(current.id);
 });
 
+function set_context_icon(icon){
+	console.log(icon);
+	$(".context-icon").val(icon);
+}
+
+
 // gear button (preferences)
 $(document).on('click', ".pref-button", function(){ 
         
@@ -229,6 +243,8 @@ $(document).on('click', ".pref-button", function(){
         $("#slot4").val(preferences.slot4); 
         $("#slot5").val(preferences.slot5); 
         $("#slot6").val(preferences.slot6); 
+        $("#slot7").val(preferences.slot7); 
+        $("#slot8").val(preferences.slot8); 
         
         $("#star_icon").val(preferences.star_icon); 
         
