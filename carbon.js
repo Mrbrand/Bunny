@@ -50,10 +50,10 @@ var itemList = {
     
     update_postpone : function() {     
         postponed_items = itemList.get_all_items().query("postpone","!=","");
-        console.log(postponed_items);
+        //console.log(postponed_items);
         postponed_items.forEach(function(item) {
-          console.log(item.postpone);
-          console.log(moment());
+          //console.log(item.postpone);
+          //console.log(moment());
           if(moment(item.postpone, 'YYYY-MM-DD') < moment()) item.postpone =""; 
         });
 	},

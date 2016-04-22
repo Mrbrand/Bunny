@@ -469,6 +469,8 @@ function view_item (id) {
     var status = $(".status-filter").val();
     var path = $(".path-filter").val();
     var prio = $(".prio-filter").val();
+    var context = $(".context-filter").val();
+    console.log(context);
     
     // skapa path knappar 
     $("#path-buttons").empty();
@@ -497,6 +499,10 @@ function view_item (id) {
     
     // filtrera type om fält är satt
     if (prio) filtered_items = filtered_items.query("prio","<", prio+1);
+
+    // filtrera title om fält är satt
+    if (context) filtered_items = filtered_items.query("icon", "==", context);
+
     
     // begränsa sökning till prioriterade om för få filter är satta
     //if (query=="") filtered_items = filtered_items.query("prio", "<", 6);
