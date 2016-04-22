@@ -176,8 +176,22 @@
                     <option value="15" data-image="img/type15.png">Vision</option> 
         			<option value="13" data-image="img/type13.png">Category</option>  
 				</select><br/>
-          
+     		
+     		
+     		<! CONTEXT>
+        		<span class="field-description">Context</span>  
+        		
+        		<div style="display:inline;">
+        			<input class="context-icon" name="icon" style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
+           		</div>
+        		
+        		<div class="context" style="margin: 10px 0; display:inline;">
+		            <!...>
+        		</div>
+        		
+        		
             <! PRIO>
+            	<span class="field-description">Prio</span>  
 				 <div style="margin: 10px 0;">
 		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
   						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
@@ -237,9 +251,9 @@
 
 		<! CONTEXT>
         		<span class="field-description">Context</span>  
-        		
+  
         		<div style="display:inline;">
-        			<input class="context-icon" name="icon" style="margin: 10px 0;  width:60px; height:40px; font-size:40px;text-align: center; background: transparent; border: none; > "/>
+        			<input class="context-icon" name="icon" style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
            		</div>
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
@@ -331,14 +345,14 @@
             
             <span class="field-description">Star icon</span>
             <input type="text" id="star_icon" style="width:70px;" placeholder="Star icon"/><br/>
-            
+
             <span class="field-description">Background (CSS color)</span>
             <input type="text" id="background_color" style="width:70px;" placeholder=""/><br/>
             <span class="field-description">Menu (CSS color)</span>
             <input type="text" id="controls_color" style="width:70px;" placeholder=""/><br/>
            
            	<button id="export-button">Export</button><br/><br/>
-           	<input type="text" id="import" style="width:70px;" placeholder=""/>
+           	<textarea id="import" style="width:70px;" /></textarea>
            	<button id="import-button">Import</button>
            
             <h3>Statistics</h3>

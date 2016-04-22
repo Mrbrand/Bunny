@@ -75,6 +75,7 @@ $(document).on('click', ".new-button", function() {
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input[name="postpone"]').val(undefined); //postpone
     $('#new-item-form textarea[name="notes"]').val(""); //notes
+    $('#new-item-form input[name="icon"]').val(""); //postpone
     
     $('#new-item-form input[name="parent_id"]').val(current.id); //parent_id
    
@@ -86,6 +87,13 @@ $(document).on('click', ".new-button", function() {
     else if (current.type == 13) new_item_type.setIndexByValue("7"); //category -> project
     else new_item_type.setIndexByValue("6"); //task	
     	
+    	
+   	$(".context").empty();
+    for (i = 1; i <= 8; i++) { 
+    	icon = preferences['slot'+i];
+		$(".context").append('<button onclick="set_context_icon(\'' +icon+'\');" type="button" style="margin-left:3px;">'+icon+'</button>');
+	}
+	
     	/*$("input.item-id").val(current.id);
     	$("#new-item-title").val("");
     	$("#new-item-notes").val("");
@@ -126,7 +134,7 @@ $(document).on('click', ".subitem-left", function() {
     $(".context").empty();
     for (i = 1; i <= 8; i++) { 
     	icon = preferences['slot'+i];
-		$(".context").append('<button onclick="set_context_icon(\'' +icon+'\');" type="button" style="margin-left:5px;">'+icon+'</button>');
+		$(".context").append('<button onclick="set_context_icon(\'' +icon+'\');" type="button" style="margin-left:3px;">'+icon+'</button>');
 	}
         
     /*
