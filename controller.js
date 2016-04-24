@@ -470,6 +470,8 @@ function view_item (id) {
     var path = $(".path-filter").val();
     var prio = $(".prio-filter").val();
     var context = $(".context-filter").val();
+    var prioline="";
+    var postponeline=true;
     console.log(context);
     
     // skapa path knappar 
@@ -533,6 +535,19 @@ function view_item (id) {
     
     // mata ut items med mustache
     filtered_items.forEach(function(item) {
+        if (item.prio != prioline)  {
+        	
+        	if (item.postpone == "") {
+		    	prio_item_count = filtered_items.query("prio","==",item.prio).query("postpone","==","").length;
+		    	$("#filtered").append("<div style='padding:3px; background:#333;color:#AAA;'>"+prio_item_count+"<img src='img/prio"+item.prio+".png'></div>");
+        	}
+        	else if (postponeline) {
+        		$("#filtered").append("<div style='padding:3px; background:#333;color:#AAA;'>Postponed</div>"); 
+        		postponeline=false;
+        	}
+        	prioline=item.prio; 
+ 
+        }
         var template = $('#filtered_items_template').html();
     	var html = Mustache.to_html(template, item);
     	$("#filtered").append(html);

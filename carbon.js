@@ -65,7 +65,7 @@ var itemList = {
         //inte ta med allt (sub-sub)
         var subitems_clean = [];
         subitems.forEach(function(item) {
-            subitems_clean.push({title: item.title, type: item.type, postpone: item.postpone, prio: item.prio});
+            subitems_clean.push({title: item.title, type: item.type, postpone: item.postpone, prio: item.prio, icon: item.icon});
         }); 
         
         item.subitems = subitems_clean;

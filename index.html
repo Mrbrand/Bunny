@@ -184,7 +184,7 @@
         		<span class="field-description">Context</span>  
         		
         		<div style="display:inline;">
-        			<input class="context-icon" name="icon" style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
+        			<input class="context-icon" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
            		</div>
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
@@ -255,7 +255,7 @@
         		<span class="field-description">Context</span>  
   
         		<div style="display:inline;">
-        			<input class="context-icon" name="icon" style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
+        			<input class="context-icon" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
            		</div>
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
@@ -398,7 +398,8 @@
 				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
 				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
 				{{#subitems}}
-					<img style="margin:4px 0px 4px 5px;height:10px;vertical-align: text-top;" src="img/type{{type}}.png"/>
+					{{#icon}}<span style="font-size: 13px;">{{icon}}</span>{{/icon}}
+					{{^icon}}<img style="margin:4px 0px 4px 5px;height:13px;vertical-align: text-top;" src="img/type{{type}}.png"/>{{/icon}}
 					<span class="next_action">{{title}}</span>
 					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
                     {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}<br/>
@@ -465,7 +466,8 @@
                 {{#postpone}}<span class="postpone">{{postpone}}</span><br/>{{/postpone}}
 				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
 				{{#subitems}}
-                    <img style="margin:4px 0px 4px 5px;height:10px;vertical-align: text-top;" src="img/type{{type}}.png"/>
+                    {{#icon}}<span style="font-size: 13px;">{{icon}}</span>{{/icon}}
+					{{^icon}}<img style="margin:4px 0px 4px 5px;height:13px;vertical-align: text-top;" src="img/type{{type}}.png"/>{{/icon}}
 					<span class="next_action">{{title}}</span> 
 					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
                     {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}<br/>
