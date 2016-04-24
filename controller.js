@@ -211,10 +211,16 @@ $(document).on('click', ".more-button", function() {
 	$('.more-button').hide();
  });
 
+// .home-button
+ $(document).on('click', ".home-button", function() {
+	view_item(0);
+    //$("#search-item").val("");
+ });
+
 // .back-button
  $(document).on('click', ".back-button", function() {
 	view_item(current.parent_id);
-    $("#search-item").val("");
+    //$("#search-item").val("");
  });
 
 // swipe back
@@ -410,8 +416,8 @@ function view_item (id) {
 	// var query = $("#search-item").val().toLowerCase();
     
     // gömma Back-knapp för Root item
-	if(id == 0) $("#tree>.controls>.back-button").hide(); 
-	else $("#tree>.controls>.back-button").show();
+	if(id == 0) {$("#tree>.controls>.back-button").hide(); $("#tree>.controls>.home-button").hide();} 
+	else {$("#tree>.controls>.back-button").show(); $("#tree>.controls>.home-button").show();}
     //filtrera array med items
     open_items = itemList.get_all_items().query("finish_date","==","").query("parent_id", "==", id);
     /*open_items = open_items.filter(function (item){

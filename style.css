@@ -46,6 +46,7 @@ input[type=radio]:checked + label>img {
     
     .menu-title {margin-left:5px; width:220px; display:block; float:left; text-overflow:ellipsis; white-space:nowrap;overflow: hidden; font-size: 20px; text-shadow:1px 1px 1px #123;}
     .new-button {float:right;}
+    .home-button {float:left;margin-right:3px;}
     .back-button {float:left;}
 	.cancel-button {float:left;}
 	.add-button{float:right;}
