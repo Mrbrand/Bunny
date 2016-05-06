@@ -121,7 +121,7 @@ $(document).on('click', ".new-button", function() {
  });
 
 
-// .subitem-left (edit-läge)
+// EDIT  .subitem-left (edit-läge)
 $(document).on('click', ".subitem-left", function() {
     
     var id = $(this).parent().find(".item_id").text();
@@ -134,7 +134,7 @@ $(document).on('click', ".subitem-left", function() {
     $(".context").empty();
     for (i = 1; i <= 8; i++) { 
     	icon = preferences['slot'+i];
-		$(".context").append('<button onclick="set_context_icon(\'' +icon+'\');" type="button" style="margin-left:3px;">'+icon+'</button>');
+		$(".context").append('<button onclick="set_context_icon(\'' +icon+'\');" type="button" style="margin-left:2px;">'+icon+'</button>');
 	}
         
     /*
