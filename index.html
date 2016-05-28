@@ -204,9 +204,7 @@
   						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
         		</div>
-		    <! POSTPONE>
-                <input id="new-item-postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
-         
+		   
              <! NOTES>       
 				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="10"></textarea>
 				
@@ -276,12 +274,9 @@
         		</div>
 
            
-         <! POSTPONE >   
-                <span class="field-description">Postpone</span>    
-				<input id="postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
-									
+       
 			<! NOTES >
-				<textarea class="item-notes" name="notes" rows="80" placeholder="Notes"></textarea>
+				<textarea class="item-notes" name="notes" rows="8" placeholder="Notes"></textarea>
 
 			<! MORE BUTTON >
 				<center>
@@ -297,7 +292,11 @@
                   <! PARENT >
                     <span class="field-description">Parent item in tree</span>
         			<input id="parent" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
-                                        
+                 
+                 <! POSTPONE >   
+                <span class="field-description">Postpone</span>    
+				<input id="postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
+									                        
                	
      			<! CREATED >                                                   
                     <span class="field-description">Item created</span>
