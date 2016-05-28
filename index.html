@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Wiseguy</title> 
+        <title>Bunny</title> 
     	
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
@@ -15,7 +15,7 @@
         <script src="awesomplete/awesomplete.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="style.css"/>
-		<link rel="stylesheet" type="text/css" href="carbon.css"/>
+		<!link rel="stylesheet" type="text/css" href="carbon.css"/>
 		<link rel="stylesheet" type="text/css" href="light.css"/>
     	
 	
@@ -83,21 +83,21 @@
 			<div class="controls" style="height:40px; padding: 5px;">
                 <input class="search" onkeyup="view_filter();" placeholder="Title search" value="" style="width:100px; float:left; margin-right:5px;"/>
                 
-                <button onclick=" $('.type-filter').val('7'); $('.path-filter').val(''); $('.context-filter').val(''); view_filter();$('#controls-context').hide();$('#controls-path').show();" style="float:left; margin-right:5px;"><img src="img/type7.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('6'); $('.path-filter').val(''); $('.context-filter').val(''); view_filter();$('#controls-context').show();$('#controls-path').hide();" style="float:left; margin-right:5px;"><img src="img/type6.png" height="16"/></button>
+                <button onclick=" $('.type-filter').val(''); $('.path-filter').val(''); $('.context-filter').val(''); view_filter();" style="float:left; margin-right:5px;">All</button>
+                <!--button onclick=" $('.type-filter').val('7'); $('.path-filter').val(''); $('.context-filter').val(''); view_filter();$('#controls-context').hide();$('#controls-path').show();" style="float:left; margin-right:5px;"><img src="img/type7.png" height="16"/></button>
+                <button onclick=" $('.type-filter').val('6'); $('.path-filter').val(''); $('.context-filter').val(''); view_filter();$('#controls-context').show();$('#controls-path').hide();" style="float:left; margin-right:5px;"><img src="img/type6.png" height="16"/></button-->
                <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
-                
-            </div><!-- end controls-->
+            </div><! end controls>
             
         <! Controls categories>
             <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px;display:none;">
-                <div id="path-buttons" style="float:left;"></div>
-            </div><!-- end controls categories-->
+                <!--div id="path-buttons" style="float:left;"></div-->
+            </div><! end controls categories>
        
         <! Controls context>
-            <div id="controls-context" class="controls-extra" style="height:40px; padding: 5px;display:none;">    
+            <div id="controls-context" class="controls-extra" style="height:40px; padding: 5px;">    
             	<div id="prefefined" style="float:left;"></div>
-            </div><!-- end controls context-->
+            </div><! end controls context>
             
         <!Title-filter>
             <div id="controls-title" class="controls-extra" style="display:none;">
@@ -281,7 +281,7 @@
 				<input id="postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
 									
 			<! NOTES >
-				<textarea class="item-notes" name="notes" rows="10" placeholder="Notes"></textarea>
+				<textarea class="item-notes" name="notes" rows="80" placeholder="Notes"></textarea>
 
 			<! MORE BUTTON >
 				<center>
@@ -294,13 +294,9 @@
     				<input class="item-parent-id" name="parent_id" type="hidden"/><br/>	
     				<input id="order" type="hidden" name="order" />
                     	
-                    	<! PARENT >
+                  <! PARENT >
                     <span class="field-description">Parent item in tree</span>
-        				<input id="parent" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
-                    
-                    <! RESPAWN >
-                    <span class="field-description">Make item respawn after finish</span>
-                    <input id="repeat" type="text" name="repeat" placeholder="Respawn after ... days" style="margin-bottom:5px;height:40px; font-size:1.1em" /> <br/>
+        			<input id="parent" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
                                         
                	
      			<! CREATED >                                                   
@@ -355,7 +351,8 @@
             <span class="field-description">Menu (CSS color)</span>
             <input type="text" id="controls_color" style="width:70px;" placeholder=""/><br/>
            
-           	<button id="export-button">Export</button><br/><br/>
+           	<button id="export-button">Export All</button><br/><br/>
+           	<button id="export-subtree-button">Export Subtree</button><br/><br/>
            	<textarea id="import" style="width:70px;" /></textarea>
            	<button id="import-button">Import</button>
            
@@ -490,14 +487,14 @@
 
 
 <script id="filter_buttons_template" type="text/template">
-    <button onclick="$('.context-filter').val('{{slot1}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot1}}</button>
-    <button onclick="$('.context-filter').val('{{slot2}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot2}}</button>
-    <button onclick="$('.context-filter').val('{{slot3}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot3}}</button>
-    <button onclick="$('.context-filter').val('{{slot4}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot4}}</button>
-    <button onclick="$('.context-filter').val('{{slot5}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot5}}</button>
-    <button onclick="$('.context-filter').val('{{slot6}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot6}}</button>
-    <button onclick="$('.context-filter').val('{{slot7}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot7}}</button>
-    <button onclick="$('.context-filter').val('{{slot8}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot8}}</button>
+    <button onclick="$('.context-filter').val('{{slot1}}'); $('.status-filter').val('open'); $('.type-filter').val(''); $('.path-filter').val(''); view_filter();">{{slot1}}</button>
+    <button onclick="$('.context-filter').val('{{slot2}}'); $('.status-filter').val('open'); $('.type-filter').val(''); $('.path-filter').val(''); view_filter();">{{slot2}}</button>
+    <button onclick="$('.context-filter').val('{{slot3}}'); $('.status-filter').val('open'); $('.type-filter').val(''); $('.path-filter').val(''); view_filter();">{{slot3}}</button>
+    <button onclick="$('.context-filter').val('{{slot4}}'); $('.status-filter').val('open'); $('.type-filter').val(''); $('.path-filter').val(''); view_filter();">{{slot4}}</button>
+    <button onclick="$('.context-filter').val('{{slot5}}'); $('.status-filter').val('open'); $('.type-filter').val(''); $('.path-filter').val(''); view_filter();">{{slot5}}</button>
+    <button onclick="$('.context-filter').val('{{slot6}}'); $('.status-filter').val('open'); $('.type-filter').val(''); $('.path-filter').val(''); view_filter();">{{slot6}}</button>
+    <button onclick="$('.context-filter').val('{{slot7}}'); $('.status-filter').val('open'); $('.type-filter').val(''); $('.path-filter').val(''); view_filter();">{{slot7}}</button>
+    <button onclick="$('.context-filter').val('{{slot8}}'); $('.status-filter').val('open'); $('.type-filter').val(''); $('.path-filter').val(''); view_filter();">{{slot8}}</button>
 </script>	
 
 <script id="path_button_template" type="text/template">
