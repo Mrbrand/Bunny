@@ -58,9 +58,7 @@ window.addEventListener("awesomplete-selectcomplete", function(e){
 }, false);
 
 $(document).on('focus', "#parent", function() {
- $("#parent").val("");
-
-
+ 	$("#parent").val("");
 });
 
 
@@ -69,7 +67,6 @@ $(document).on('focus', "#parent", function() {
 $(document).on('click', ".new-button", function() {
 
     $(".menu-title").html("New: "+current.title); //titel i meny
-    
     
     $('#new-item-form textarea[name="title"]').val(""); //title
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
@@ -93,25 +90,6 @@ $(document).on('click', ".new-button", function() {
     	icon = preferences['slot'+i];
 		$(".context").append('<button onclick="set_context_icon(\'' +icon+'\');" type="button" style="margin-left:3px;">'+icon+'</button>');
 	}
-	
-    	/*$("input.item-id").val(current.id);
-    	$("#new-item-title").val("");
-    	$("#new-item-notes").val("");
-    	//$("#new-item-size").val("6");
-    	$("#new-item-postpone").val(undefined);
-    	$("#new-parent-id").val(current.id);
-    	$("#new-order").val(itemList.get_min_order(current.id)-1);*/
-		//$("#new-parent-id").val(current.id);
-		
-		//$('#new-item-form input:radio[value='+5+']').prop('checked', true);
-		
-		
-    //drop down med bilder plugin
-    //new_item_prio.setIndexByValue("6"); 
-    
-	//sätta type beroende på current.type
-	
-	
 	
 	$(".page").hide();
 	$("#new").show();
