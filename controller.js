@@ -13,8 +13,7 @@ var new_item_type =  $("#new-item-type").msDropDown().data("dd");
 var preferences = {};
 var scroll_position = 0;
 
-var input_parent = document.getElementById("parent");
-var awesomplete = new Awesomplete(input_parent);
+
 
 // Initiera itemslista från local storage
 itemList.init("wiseguy_items");
@@ -23,8 +22,16 @@ else if(itemList.itemArray==null) itemList.exampledata();
 //itemList.filtered("all","");
 view_item(0);
 
+//awesomlete
+var input_parent = document.getElementById("parent");
+var awesomplete = new Awesomplete(input_parent);
+
+var input_search = document.getElementById("quick_search");
+var awesomplete2 = new Awesomplete(input_search);
 
 awesomplete.list = itemList.get_quicklist();
+awesomplete2.list = itemList.get_quicklist();
+
 
 // Initiera Inställningar från local storage  
 var preferences = window.localStorage.getItem("wiseguy_preferences");
@@ -50,12 +57,31 @@ Sortable.create(list, {handle: '.subitem-right',onSort: function (evt) {
 }});
 
 window.addEventListener("awesomplete-selectcomplete", function(e){
-    console.log($("#parent").val());
-    str = $("#parent").val()
-    pos = str.indexOf("#");
-    id = parseInt(str.substr(pos+1));
-    $(".item-parent-id").val(id);
+    
+    switch($(e.target)[0].id) 
+        {
+            //event via edit meny
+            case "parent": 
+               	str = $("#parent").val()
+				pos = str.indexOf("#");
+				id = parseInt(str.substr(pos+1));
+				$(".item-parent-id").val(id);
+                break;
+            //event via tree meny   
+            case "quick_search": 
+               	str = $("#quick_search").val()
+				pos = str.indexOf("#");
+				id = parseInt(str.substr(pos+1));
+				 view_item (id);
+                break;
+            default:
+            console.log("miss");
+         }
+   
 }, false);
+
+
+
 
 $(document).on('focus', "#parent", function() {
  	$("#parent").val("");
@@ -169,6 +195,7 @@ $(document).on('click', ".subitem-center", function() {
 $(document).on('click', ".add-button", function() {
     itemList.add_from_form("#new-item-form");
     awesomplete.list = itemList.get_quicklist();
+    awesomplete2.list = itemList.get_quicklist();
 	view_item(current.id);
  });
 
@@ -177,6 +204,7 @@ $(document).on('click', ".add-button", function() {
 $(document).on('click', ".save-button", function() {
    itemList.edit_from_form("#edit-item-form");
    awesomplete.list = itemList.get_quicklist();
+   awesomplete2.list = itemList.get_quicklist();
 	if(view=="tree")	view_item(current.id);
 	else view_filter();
     $("body").scrollTop(scroll_position);
@@ -390,7 +418,8 @@ function view_item (id) {
     var diff;
     var output = "";
     
-    $(".menu-title").html(itemList.get_item(id).title);
+    //$(".menu-title").html(itemList.get_item(id).title);
+	$("#quick_search").val(itemList.get_item(id).title);
 	// var query = $("#search-item").val().toLowerCase();
     
     // gömma Back-knapp för Root item

@@ -32,7 +32,7 @@
         
         <script src="javascript/sortable.js"></script>
 		
-	</head
+	</head>
 	
 	
 	<body>
@@ -43,22 +43,23 @@
 			<div id="tree" class="page" style="display:block; min-height:450px;">
 			  
 			<div class="header">
-				<div class="menu-title">Root</div>
+				<!--div class="menu-title">Root</div-->
+				<input id="quick_search" type="text" onclick="this.value='';" style="float:left; width: 250px; font-size:1.1em; color:black; background: transparent; border:none;"/>
 				<img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
                 <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 			<!--Sub-meny-->
 			<div class="controls">
-				<button class="home-button"><img src="img/home16.png"</button>
+				<button class="home-button"><img src="img/home16.png"></button>
 				<button class="back-button">Back</button>
 				
-				
+                
                 <button class="new-button">New</button>
                 
                 <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
                 <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
-    	
+    			<div style="clear: both;"></div>
 			</div><!-- end controls-->
 			
 			<!-- Projektlista -->
