@@ -102,7 +102,7 @@ $(document).on('click', ".new-button", function() {
     
     $('#new-item-form input[name="parent_id"]').val(current.id); //parent_id
    
-	$('#new-item-form input[name="id"]').val(current.id); //id (hidden)
+	//$('#new-item-form input[name="id"]').val(current.id); //id (hidden)
    $('#new-item-form input[name="order"]').val(itemList.get_min_order(current.id)-1); //order (hidden)
     
     //type beroende på parent type	
@@ -392,6 +392,19 @@ function to_finished(){
     view_filter();    
 }
 
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
 
 function to_search(){
     $(".search").val("");
@@ -657,8 +670,11 @@ $(document).on('click', "#export-button", function() {
     console.log(items);
     console.log(items_string);
     $("#export").html(items_string);
+    
+    download("bunny backup "+moment().format('YYYY-MM-DD')+".txt", items_string);
     $(".page").hide();
     $("#export").show();
+    
 });
 
 
