@@ -369,6 +369,10 @@ $(document).on('click', ".tree-button", function() {
 	view_item(current.id);
  });
 
+$(document).on('keyup', "#tree .search", function() {
+	view_item(current.id);
+ });
+
 // Reset filter buttot
 $(document).on('click', ".reset-filter", function() {
     itemList.update_postpone();
@@ -425,7 +429,8 @@ function togggleStatus(){
 function view_item (id) {
 	view = "tree";
 	current = itemList.get_item(id);
-	
+	var query = $("#tree .search").val().toLowerCase();
+	console.log(query);
     // time measurements
     var timeInMs = Date.now();
     var diff;
@@ -439,7 +444,9 @@ function view_item (id) {
 	if(id == 0) {$("#tree>.controls>.back-button").hide(); $("#tree>.controls>.home-button").hide();} 
 	else {$("#tree>.controls>.back-button").show(); $("#tree>.controls>.home-button").show();}
     //filtrera array med items
-    open_items = itemList.get_all_items().query("finish_date","==","").query("parent_id", "==", id);
+    open_items = itemList.get_all_items().query("finish_date","==","").query("parent_id", "==", id).query("title, notes", "contains", query);
+    console.log(open_items);
+    
     /*open_items = open_items.filter(function (item){
      	return item["title"].toLowerCase().indexOf(query) !== -1 | item["notes"].toLowerCase().indexOf(query) !== -1; 	
 	});*/
