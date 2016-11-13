@@ -16,7 +16,7 @@ var scroll_position = 0;
 
 
 // Initiera itemslista från local storage
-itemList.init("bunny_items");
+itemList.init("wiseguy_items");
 if (itemList.itemArray==undefined) itemList.exampledata();
 else if(itemList.itemArray==null) itemList.exampledata();
 //itemList.filtered("all","");
