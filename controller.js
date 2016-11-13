@@ -16,7 +16,7 @@ var scroll_position = 0;
 
 
 // Initiera itemslista från local storage
-itemList.init("wiseguy_items");
+itemList.init("bunny_items");
 if (itemList.itemArray==undefined) itemList.exampledata();
 else if(itemList.itemArray==null) itemList.exampledata();
 //itemList.filtered("all","");
@@ -313,8 +313,11 @@ $(document).on('click', ".pref-button", function(){
         console.log(new_items);
         $("#statistics").append("<br/>New: "+new_items.length);
         
+        view_settings();
         $(".page").hide();
 		$("#menu").show();
+		
+		
 });
 
 // .cancel-button
@@ -343,6 +346,7 @@ $(document).on('click', ".finish-button", function() {
         if(item.repeat){
             var item_copy = itemList.copy_item(item.id);
             item_copy["postpone"] = moment().add( item.repeat, 'days').format('YYYY-MM-DD');      
+        	
         }
         
         itemList.finish_item(item.id);
@@ -662,16 +666,16 @@ function save_preferences(){
 }
 
 // #import-button
-$(document).on('click', "#import-button", function() {
+/*$(document).on('click', "#import-button", function() {
     if (confirm('All current data will be deleted?')==true) {
         window.localStorage.setItem(itemList.storageKey, $('#import').val());
         itemList.init("wiseguy_items");
         view_item(0);
     }
 });
- 
+ */
 // #export all-button
-$(document).on('click', "#export-button", function() {
+/*$(document).on('click', "#export-button", function() {
     var items = itemList.get_all_items().query("finish_date","==","");
     var items_string = JSON.stringify(items);
     console.log(items);
@@ -683,7 +687,7 @@ $(document).on('click', "#export-button", function() {
     $("#export").show();
     
 });
-
+*/
 
 // #export subtree-button
 $(document).on('click', "#export-subtree-button", function() {
@@ -697,3 +701,68 @@ $(document).on('click', "#export-subtree-button", function() {
     $("#export").show();
 });
 
+
+// swipe back settings
+$("#export").on('swiperight',  function(){ 
+	$(".page").hide();
+    $("#menu").show();
+});
+
+
+function view_settings(){
+    
+    var field1 = $("#field1").val().toLowerCase();
+    var op1 = $("#op1").val();
+    var value1 = $("#value1").val();
+    var field2 = $("#field2").val().toLowerCase();
+    var op2 = $("#op2").val();
+    var value2 = $("#value2").val();
+    var items=itemList.itemArray;
+    	
+    if(field1!="") items = items.query(field1, op1, value1);
+    if(field2!="") items = items.query(field2, op2, value2);
+    //console.log(items.length+" items");
+    
+    $("#export_count").html(items.length+" items<br/>");
+    $("#export_count").append(items.query("finish_date", "==", "").length+" unfinished items<br/>");
+    $("#export_count").append(items.query("finish_date", "!=", "").length+" finished items");
+}
+
+$("#export-button").click(function() { 
+    
+   	var field1 = $("#field1").val().toLowerCase();
+    var op1 = $("#op1").val();
+    var value1 = $("#value1").val();
+    var field2 = $("#field2").val().toLowerCase();
+    var op2 = $("#op2").val();
+    var value2 = $("#value2").val();
+    var items=itemList.itemArray;
+    
+    if(field1!="") items = items.query(field1, op1, value1);
+    if(field2!="") items = items.query(field2, op2, value2);
+ 
+    var items_string = JSON.stringify(items);
+    $("#export").html(items_string);
+    $(".page").hide();
+    $("#export").show();
+});
+
+$("#import-button").click(function() { 
+    var items = JSON.parse($('#import').val());
+    if (confirm('Add '+items.length+' items?')==true) {
+       	import_json($('#import').val());     
+       	open_page("#issues");
+    }
+});
+
+
+function import_json(json) {
+
+    var items = JSON.parse(json);
+    console.log(items);
+ 	for (i = 0; i < items.length; i++) { 
+    	itemList.itemArray.push(items[i]);
+    	console.log(items[i]);
+    }
+    itemList.save_to_storage();
+};

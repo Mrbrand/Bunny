@@ -350,11 +350,35 @@
             <input type="text" id="background_color" style="width:70px;" placeholder=""/><br/>
             <span class="field-description">Menu (CSS color)</span>
             <input type="text" id="controls_color" style="width:70px;" placeholder=""/><br/>
-           
-           	<button id="export-button">Export All</button><br/><br/>
-           	<button id="export-subtree-button">Export Subtree</button><br/><br/>
+           	<br>
+           	 Export filter <br/>
+            <input id="field1" style="width:100px">
+            <select id="op1" style="width:50px;">
+					<option value="==">==</option>
+					<option value="!=">!=</option>
+					<option value="contains">contains</option>
+					<option value="<"><</option>
+					<option value=">">></option>
+				</select>
+			<input id="value1" style="width:100px"><br/>
+			<input id="field2" style="width:100px">
+            <select id="op2" style="width:50px;">
+					<option value="==">==</option>
+					<option value="!=">!=</option>
+					<option value="contains">contains</option>
+					<option value="<"><</option>
+					<option value=">">></option>
+				</select>
+			<input id="value2" style="width:100px"><br/>
+			
+           	<button onclick="view_settings();">Refresh</button><br/><br/>
+           	<div id="export_count"></div>
+           	<button id="export-button">Export</button><br/><br/>
+           	
+           	
+           	
            	<textarea id="import" style="width:70px;" /></textarea>
-           	<button id="import-button">Import</button>
+           	<br/><button id="import-button">Import</button>
            
             <h3>Statistics</h3>
             <div id="statistics"></div>
