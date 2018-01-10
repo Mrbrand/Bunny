@@ -459,8 +459,8 @@ function view_item (id) {
     
     // sortera array med items
 	open_items.sort(
-	 	firstBy(function (v1, v2) { return v1.order - v2.order; })
-        .thenBy(function (v1, v2) { return v1.update_date<v2.update_date ? -1 : v1.update_date>v2.update_date ? 1 : 0; })
+	 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+        .thenBy(function (v1, v2) { return v1.order - v2.order; }).thenBy(function (v1, v2) { return v1.update_date<v2.update_date ? -1 : v1.update_date>v2.update_date ? 1 : 0; })
 	);
 
 	// rensa listor
