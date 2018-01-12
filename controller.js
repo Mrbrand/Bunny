@@ -604,7 +604,12 @@ function view_item (id) {
 
 function reorder(item_id, from_pos, to_pos){
     var items = itemList.get_subitems(item_id);
-    console.log(items);
+    
+		items.sort(
+		 	firstBy(function (v1, v2) { return v1.prio - v2.prio; })
+			.thenBy(function (v1, v2) { return v1.order - v2.order; })
+		);
+
     var offset = 0;
     
     for (var index = 0, len = items.length; index < len; index++) {
