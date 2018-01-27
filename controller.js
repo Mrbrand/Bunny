@@ -95,15 +95,15 @@ $(document).on('click', ".new-button", function() {
     $(".menu-title").html("New: "+current.title); //titel i meny
     
     $('#new-item-form textarea[name="title"]').val(""); //title
-    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+    $('#new-item-form input:radio[value="1"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input[name="postpone"]').val(undefined); //postpone
     $('#new-item-form textarea[name="notes"]').val(""); //notes
     $('#new-item-form input[name="icon"]').val(""); //postpone
     
     $('#new-item-form input[name="parent_id"]').val(current.id); //parent_id
    
-	//$('#new-item-form input[name="id"]').val(current.id); //id (hidden)
-   $('#new-item-form input[name="order"]').val(itemList.get_min_order(current.id)-1); //order (hidden)
+		//$('#new-item-form input[name="id"]').val(current.id); //id (hidden)
+   	$('#new-item-form input[name="order"]').val(itemList.get_min_order(current.id)-1); //order (hidden)
     
     //type beroende på parent type	
     if (current.type == 6) new_item_type.setIndexByValue("4"); //task -> idé
